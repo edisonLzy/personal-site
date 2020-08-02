@@ -4,12 +4,13 @@
   "description": "personal blog of leezhiyu",
   "main": "./server/index.js",
   "scripts": {
-    "dev":"npm-run-all -p dev:server dev:client",
+    "dev":"npm-run-all -p dev:client dev:server",
     "dev:server":"cd server && npm run dev",
     "dev:client":"cd client && npm run serve",
     "build": "npm-run-all -s build:server build:client",
     "build:client":"cd client && npm run build",
-    "build:server":"cd server && npm run build"
+    "build:server":"cd server && npm run build",
+    "start":"cd dist && node index.js"
   },
   "keywords": [
     "blog",

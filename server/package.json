@@ -1,15 +1,30 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "webpack node",
   "main": "index.js",
   "scripts": {
-    "build": "npx webpack ./index.js"
+    "dev": "nodemon --watch src --exec 'npm run dev:build && npm run dev:exec'",
+    "dev:build": "cross-env NODE_ENV=development webpack",
+    "dev:exec": "node dist/index",
+    "build": "cross-env NODE_ENV=production webpack"
   },
+  "keywords": [
+    "webpack",
+    "node",
+    "express"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "cross-env": "^7.0.2",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.2",
+    "ora": "^4.0.5"
   }
 }
