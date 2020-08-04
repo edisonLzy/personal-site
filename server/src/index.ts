@@ -3,8 +3,10 @@ import ora from 'ora';
 import path from 'path';
 import config from './config.json';
 import { isDev } from './utils';
+import initDatabase from './models'
 
-
+//  初始化数据库 和 sequelize
+initDatabase();
 const app = express();
 const pro = ora(`serve is staring....`);
 pro.start()
