@@ -18,7 +18,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Model } from "vue-property-decorator";
+import {scroll} from "@/utils/window";
+import { Vue, Component, Prop, Model,Watch } from "vue-property-decorator";
 @Component({
     name: "l-search",
 })
@@ -27,6 +28,11 @@ export default class lSearch extends Vue {
   // Model
   @Model("input", { type: Boolean })
   visible!: boolean;
+  @Watch("visible")
+  // 显示的时候禁止滚动条
+  onVisible(val:boolean){
+      val?scroll.hidden():scroll.show();
+  }
   close() {
       this.$emit("input", false);
   }

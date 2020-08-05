@@ -1,7 +1,7 @@
 import express from 'express';
 import ora from 'ora';
 import path from 'path';
-import config from './config.json';
+import config from './config/server.json';
 import { isDev } from './utils';
 import initDatabase from './models'
 

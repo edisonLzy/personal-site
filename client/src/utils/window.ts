@@ -1,3 +1,20 @@
+// 禁止滚动条
+export const scroll = {
+    root:document.documentElement,
+    widthBar:17,
+    hidden(){
+        // 判断是否是window系统
+        if(typeof window.innerWidth === "number"){
+            this.widthBar = window.innerWidth - this.root.clientWidth;
+        }
+        this.root.style.overflow = "hidden";
+        this.root.style.borderRight = this.widthBar + "px solid transparent";
+    },
+    show(){
+        this.root.style.overflow ="";
+        this.root.style.borderRight = "";
+    }
+};
 // 获取滚动条的高度
 export function getScrollTop() {
     if (document.documentElement.scrollTop) {

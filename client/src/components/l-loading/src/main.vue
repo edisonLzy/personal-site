@@ -12,6 +12,7 @@
 </template>
 
 <script lang="ts">
+import { scroll } from "@/utils/window";
 import { Component, Vue } from "vue-property-decorator";
 @Component({
     name: "l-loading",
@@ -20,9 +21,11 @@ export default class LLoading extends Vue {
   static componentname = "l-loading";
   visible = true;
   close() {
+      scroll.show();
       this.visible = false;
   }
   start() {
+      scroll.hidden();
       this.visible = true;
   }
 }

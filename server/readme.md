@@ -60,3 +60,5 @@ export function initAdmin() {
   return Admin
 } 
 ```
+
+### 三层架构模型
