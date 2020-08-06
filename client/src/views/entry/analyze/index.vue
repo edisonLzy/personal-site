@@ -14,7 +14,6 @@
         <l-echarts v-bind="op" title="文章阅读量"></l-echarts>
       </div>
     </section>
-    <l-forward title="数据持续更新中!"></l-forward>
   </div>
 </template>
 

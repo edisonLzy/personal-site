@@ -3,7 +3,6 @@
 /* common */
 .l-line {
     position: relative;
-
     &::after {
         content: "";
         display: block;
@@ -68,6 +67,13 @@
     }
 }
 
+/* border */
+.l-border-bottom{
+    border-bottom: 1px solid $g-divideColor;
+}
+.l-circle{
+    border-radius: 50%;
+}
 /* position */
 .l-fixed-cover {
     position: fixed;

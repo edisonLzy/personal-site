@@ -1,6 +1,6 @@
 <template>
   <div class="l-block">
-    <section class="l-block-title">
+    <section class="l-block-title l-border-bottom">
       <h2>{{title}}</h2>
     </section>
     <section class="l-block-content">
@@ -26,19 +26,19 @@ export default class LBlock extends Vue {
 <style lang="scss" scoped>
 .l-block {
   margin-bottom: $g-gap;
+  padding: 15px 20px;
+  background-color: #fff;
+  border-radius: $g-radius;
   &-title {
-    margin-bottom: $g-gap;
     line-height: 20px;
-    padding: 15px 20px;
-    background-color: #fff;
-    border-radius: 10px;
+    padding-bottom: .5em;
     h2 {
       font-weight: 400;
       font-size: 15px;
     }
   }
   &-content{
-     border-radius: 10px;
+    padding-top: .5em;
     cursor: pointer;
   }
 }

@@ -78,9 +78,9 @@ export default class Blog extends Vue {
           i.close();
       },2000);
       
-      // this.$router.push({
-      //     name: "detail",
-      // });
+      this.$router.push({
+          name: "detail",
+      });
   }
   async init() {
       this.tagList = await getTag();

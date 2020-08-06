@@ -8,11 +8,14 @@
       <!-- 内容展示区域 -->
       <router-view></router-view>
     </main>
-
+     
       <!-- 回到顶部 -->
       <l-toTop></l-toTop>
       <!-- 搜索组件 -->
       <l-search v-model="visible" :queryFun="queryFunc"></l-search>
+
+      <!-- footer -->
+    <l-forward title="Fear no one"></l-forward>
   </div>
 </template>
 
