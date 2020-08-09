@@ -1,6 +1,7 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from './db';
-export const User = sequelize.define('User', {
+const { DataTypes }=require( 'sequelize');
+const  sequelize =require( './db');
+
+module.exports = sequelize.define('User', {
   'user_account': {
     type: DataTypes.STRING,
     allowNull: false
