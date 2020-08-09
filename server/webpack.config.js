@@ -16,7 +16,7 @@ module.exports = {
       "@": path.resolve(__dirname, "src"),
     },
   },
-  stats:"none",
+  // stats:"none",
   target: "node",
   module:{
     rules:[

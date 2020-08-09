@@ -15,6 +15,7 @@
           <router-link class="link-item" :to="item.name" :key="item.name">{{item.title}}</router-link>
         </template>
       </section>
+
       <section class="search" @click="search">
         <slot name="search">
           <span class="fas fa-search"></span>
@@ -36,21 +37,21 @@ interface NavItem {
   name: string;
   title: string;
 }
-import { Component, Vue, Prop,Emit } from "vue-property-decorator";
+import { Component, Vue, Prop, Emit } from "vue-property-decorator";
 @Component({
     name: "l-navigator",
-    components: {}
+    components: {},
 })
 export default class LNavigator extends Vue {
   static componentname = "l-navigator";
   @Prop({
       type: Array,
-      required: true
+      required: true,
   })
   navList!: NavItem[];
 
   menuVisible = false;
-  toggleMenu(e: Event) {
+  toggleMenu() {
       this.menuVisible = !this.menuVisible;
   }
   closeMenu(e: any) {
@@ -59,7 +60,7 @@ export default class LNavigator extends Vue {
       }
   }
   @Emit("search")
-  search(){}
+  search() {}
 }
 </script>
 <style lang="scss" scoped>
@@ -68,7 +69,7 @@ export default class LNavigator extends Vue {
   font-size: 18px;
   max-width: 90%;
   margin: 0 auto;
-  transition:1s;
+  transition: 1s;
   @media (max-width: 1140px) {
     max-width: 100%;
   }
@@ -88,7 +89,13 @@ export default class LNavigator extends Vue {
         padding: 0 1vw;
       }
     }
-    .search{
+    .login {
+      padding-right: 1em;
+      @media (max-width: 1140px) {
+        display: none;
+      }
+    }
+    .search {
       cursor: pointer;
     }
   }

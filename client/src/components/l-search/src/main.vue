@@ -1,18 +1,21 @@
 <template>
   <transition name="slideLeft">
     <div class="l-search l-fixed-cover l-flex" v-show="visible">
-      <section class="l-search-layer"></section>
+    <l-layer @close="close" :visible= "visible">
       <main class="l-search-content l-absolute-right">
         <section class="close">
           <l-icon @click="close" iconClass="close"></l-icon>
         </section>
         <section class="input">
-          <l-input v-model="value" placeholder="请输入搜索关键词..." />
+          <l-input v-model="value" placeholder="请输入搜索关键词...">
+              <l-icon iconClass="search"></l-icon>
+          </l-input>
         </section>
         <section class="result">
           <h3>有 {{count}} 篇文章</h3>
         </section>
       </main>
+      </l-layer>
     </div>
   </transition>
 </template>
@@ -53,9 +56,6 @@ export default class lSearch extends Vue {
     flex: 1;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    // @media (max-width: 1140px) {
-    // display: none
-    // }
   }
   &-content {
     width: 20%;

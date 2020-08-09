@@ -81,7 +81,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 999;
+    z-index: 9999;
 }
 
 .l-fixed-top {
@@ -115,10 +115,20 @@
     justify-content: space-between;
 }
 
+.l-flex-v{
+    display: flex;
+    flex-direction: column;
+}
 .l-flex-v-sb {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+.l-flex-v-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .l-flex-center {

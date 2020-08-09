@@ -1,6 +1,8 @@
 <template>
   <div class="l-input l-flex">
-    <l-icon iconClass="search"></l-icon>
+    <slot>
+       <label :for="$attrs.id" class="l-input-label">{{$attrs.label + ':'}}</label>
+    </slot>
     <input 
      :value="text"
      @input="updateValue" 
@@ -8,6 +10,12 @@
      :class="styleInput" 
      v-bind="$attrs"
      />
+     <!-- 清空按钮 -->
+    <l-icon 
+    v-show="visible"
+    iconClass="close" 
+    @click="clear" 
+    style="transform:scale(.5)"></l-icon>
   </div>
 </template>
 <script lang='ts'>
@@ -27,6 +35,7 @@ export default class lInput extends Vue {
   rules!: RegExp | Function;
   /* state */
   isValidate = true;
+  visible = false;
   /* get */
   get styleInput(){
       return [
@@ -37,9 +46,14 @@ export default class lInput extends Vue {
       ];
   }
   /* methods */
+  clear(){
+      this.$emit("input","");
+  }
   @Emit("input") // 触发组件上面的自定义事件
   updateValue(e: any) {
-      //   const value = e.target.value;
+       
+      const value = e.target.value;
+      this.visible = value ===""?false:true;
       //   let res = value;
       //   //   if (Is.isRegExp(this.rules)) {
       //   //       if(!this.rules.test(value)){
@@ -62,6 +76,11 @@ export default class lInput extends Vue {
   padding: 10px 0;
   font-size: 25px;
   perspective: 300px;
+  &-label{
+    display: block;
+    width: 4em;
+    font-size: 12px;
+  }
   &__inner {
     width: 100%;
     padding-left: 1em;

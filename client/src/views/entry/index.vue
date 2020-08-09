@@ -1,21 +1,26 @@
 <template>
   <div class="container">
     <header class="header l-fixed-top">
-      <l-navigator :navList="navList" @search="search"></l-navigator>
+      <l-navigator :navList="navList" @search="search" @login="login"></l-navigator>
     </header>
 
     <main class="main">
       <!-- 内容展示区域 -->
-      <router-view></router-view>
+    <transition name="slide" mode="out-in">
+        <router-view></router-view>
+    </transition>
     </main>
      
       <!-- 回到顶部 -->
       <l-toTop></l-toTop>
       <!-- 搜索组件 -->
-      <l-search v-model="visible" :queryFun="queryFunc"></l-search>
-
+      <l-search 
+      v-model="visible" 
+      :queryFun="queryFunc"></l-search>
+      <!-- 登陆组件 -->
+      <l-login v-model="loginVisible"></l-login>
       <!-- footer -->
-    <l-forward title="Fear no one"></l-forward>
+     <l-forward title="Fear no one"></l-forward>
   </div>
 </template>
 
@@ -49,6 +54,11 @@ export default class Entry extends Vue {
   visible = false;
   search(){
       this.visible = true;
+  }
+  // 登陆
+  loginVisible = false;
+  login(){
+      this.loginVisible = true;
   }
   queryFunc(){
 
