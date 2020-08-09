@@ -15,12 +15,11 @@
   ],
   "author": "leezhiyu",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "express": "^4.17.1",
     "nodemon": "^2.0.4",
     "pg-hstore": "^2.3.3",
-  },
-  "dependencies": {
+    "log4js": "^6.2.0",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "md5": "^2.3.0",

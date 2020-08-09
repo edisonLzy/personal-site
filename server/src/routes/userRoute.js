@@ -10,7 +10,6 @@ route.post('/login', async (req, res) => {
 // 注册
 route.post('/sign', async (req, res) => {
   const body = req.body;
-  console.log(body)
   const r = await userService.sign(body);
   console.log(r)
   res.send(r)
