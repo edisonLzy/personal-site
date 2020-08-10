@@ -194,3 +194,14 @@
     transform: translateX(100%);
     opacity: 0
 }
+
+.slideBottom-enter-active,
+.slideBottom-leave-active {
+    transition: $g-transitionTime;
+}
+
+.slideBottom-enter,
+.slideBottom-leave-to {
+    transform: translateY(40%);
+    opacity: 0
+}

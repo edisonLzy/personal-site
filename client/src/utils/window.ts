@@ -1,20 +1,29 @@
 // 禁止滚动条
 export const scroll = {
-    root:document.documentElement,
-    widthBar:17,
-    hidden(){
+    root: document.documentElement,
+    widthBar: 17,
+    hidden() {
         // 判断是否是window系统
-        if(typeof window.innerWidth === "number"){
+        if (typeof window.innerWidth === "number") {
             this.widthBar = window.innerWidth - this.root.clientWidth;
         }
         this.root.style.overflow = "hidden";
         this.root.style.borderRight = this.widthBar + "px solid transparent";
     },
-    show(){
-        this.root.style.overflow ="";
+    show() {
+        this.root.style.overflow = "";
         this.root.style.borderRight = "";
     }
 };
+// 是否触地
+export function ReachBottom(dis = 10) {
+    const sT = getScrollTop();
+    // 整个页面的高度 document.body = body
+    const cH = document.body.clientHeight-dis;
+    // 视口的宽度 document.documentElement = html
+    const sH = document.documentElement.clientHeight;
+    return sT + sH >= cH;
+}
 // 获取滚动条的高度
 export function getScrollTop() {
     if (document.documentElement.scrollTop) {
@@ -36,26 +45,26 @@ export function scrollToTop() {
     }
 }
 // 添加事件监听
-export function addHandler(target:any, eventType:string, handler:any) {
+export function addHandler(target: any, eventType: string, handler: any) {
     if (target.addEventListener) {
-        addHandler = function (target:any, eventType:string, handler:any) {
+        addHandler = function (target: any, eventType: string, handler: any) {
             target.addEventListener(eventType, handler, false);
         };
     } else {
-        addHandler = function (target:any, eventType:string, handler:any) {
+        addHandler = function (target: any, eventType: string, handler: any) {
             target.addachEvent("on" + eventType, handler);
         };
     }
     addHandler(target, eventType, handler);
 }
 // 移除事件监听
-export function removeHandler(target:any, eventType:string, handler:any) {
+export function removeHandler(target: any, eventType: string, handler: any) {
     if (target.addEventListener) {
-        removeHandler = function (target:any, eventType:string, handler:any) {
+        removeHandler = function (target: any, eventType: string, handler: any) {
             target.removeEventListener(eventType, handler, false);
         };
     } else {
-        removeHandler = function (target:any, eventType:string, handler:any) {
+        removeHandler = function (target: any, eventType: string, handler: any) {
             target.detachEvent("on" + eventType, handler);
         };
     }

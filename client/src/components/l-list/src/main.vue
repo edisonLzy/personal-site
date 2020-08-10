@@ -1,21 +1,23 @@
 <template>
-  <div class="l-list l-flex-h-sb" v-on='$listeners'>
-    <section class="l-list-left l-flex">
-      <i :class="['index',{
+  <transition appear name="slideBottom" mode="out-in">
+    <div class="l-list l-flex-h-sb" v-on="$listeners">
+      <section class="l-list-left l-flex">
+        <i :class="['index',{
         'hot':index <= hotTop
       }]">{{index}}</i>
-      <picture class="pic">
-        <img class="l-img-c" :src="imgSrc" alt="artcle img" />
-      </picture>
-    </section>
-    <section class="l-list-right l-flex-v-sb">
-      <h3 class="l-list-right__title">{{title}}</h3>
-      <article class="l-list-right__desc">{{desc}}</article>
-      <ul class="l-list-right__info l-flex">
-        <UserInfo v-for="(i,p) in info" :key="i" :item="{i,p}"></UserInfo>
-      </ul>
-    </section>
-  </div>
+        <picture class="pic">
+          <img class="l-img-c" :src="imgSrc" alt="artcle img" />
+        </picture>
+      </section>
+      <section class="l-list-right l-flex-v-sb">
+        <h3 class="l-list-right__title">{{title}}</h3>
+        <article class="l-list-right__desc">{{desc}}</article>
+        <ul class="l-list-right__info l-flex">
+          <UserInfo v-for="(i,p) in info" :key="i" :item="{i,p}"></UserInfo>
+        </ul>
+      </section>
+    </div>
+  </transition>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
@@ -87,8 +89,9 @@ export default class LList extends Vue {
   border-radius: $g-radius;
   padding: 15px 20px;
   transition: $g-transitionTime;
+  border-bottom: 1px solid rgba(178,186,194,.15);
   @media (max-width: 1140px) {
-     padding: 5px 10px;
+    padding: 5px 10px;
   }
   &:hover {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -133,8 +136,8 @@ export default class LList extends Vue {
     &__info {
       padding-top: 0.5em;
       @media (max-width: 1140px) {
-     justify-content: space-between;
-    }
+        justify-content: space-between;
+      }
     }
     &__desc {
       height: 84px;

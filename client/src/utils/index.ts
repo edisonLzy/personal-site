@@ -43,3 +43,38 @@ export function performance(){
         onload:timing.loadEventEnd - start
     };
 }
+// 防抖 函数实现
+export type Immediate = true|false;
+export function debounce(fn: any, delay: number, immediate:Immediate= true,context:any){
+    // 不是函数 抛出错误
+    if(typeof fn !== "function"){
+        throw new Error("fn is not function");
+    }
+    let timer:number;
+    // 第一次触发事件是否立即执行
+    let _immediate = immediate;
+    return function (...args:any[]) {
+        if (_immediate) {
+            fn.apply(this, args);
+            _immediate = false;
+            return;
+        }
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            fn.apply(context, args);
+        }, delay);
+    };
+}
+
+// 节流 函数实现
+export function throttle(fn:any,wait:number){
+    let lastTime = 0;
+    return function(...args:any[]){
+        let nowTime = new Date().getTime();
+        if(nowTime - lastTime > wait){
+            fn.apply(this,args);
+            lastTime = nowTime;
+        }
+    };   
+}
+

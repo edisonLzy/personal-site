@@ -24,7 +24,7 @@ export default class lTag extends Vue {
   border: 1px solid #ccc;
   border-radius: $g-radius;
   font-size: 12px;
-  transition: all 0.3s ease 0s;
+  transition: all $g-transitionTime ease 0s;
   margin-right: 1.5em;
   margin-bottom: 1em;
   &:hover{
