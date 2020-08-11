@@ -1,6 +1,33 @@
 @import './var.scss';
 
 /* common */
+.l-textColor-theme{
+    color: $g-themeColor;
+}
+.l-textColor-fade{
+    color: #b3b3b3;
+}
+.l-common-btn{
+    border-radius: $g-radius;
+    background: $g-themeColor;
+    transition: background-color $g-transitionTime;
+    color: #fff;
+    padding: .5em 2em;
+    cursor: pointer;
+    &:hover{
+        background-color: #0371df;
+    }
+    
+}
+.l-link{
+    color: $g-themeColor;
+    text-decoration: underline;
+}
+.l-pre{
+    // text-align: center;
+    font-weight: bold;
+    padding: .5em 0;
+}
 .l-line {
     position: relative;
     &::after {

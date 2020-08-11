@@ -72,7 +72,7 @@ export default class lInput extends Vue {
 </script>
 <style lang='scss' scoped >
 .l-input {
-  border-bottom: 6px solid #999;
+  border-bottom: 1px dotted #999;
   padding: 10px 0;
   font-size: 25px;
   perspective: 300px;

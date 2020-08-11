@@ -14,6 +14,16 @@
         <section class="result">
           <h3>有 {{count}} 篇文章</h3>
         </section>
+
+        <!-- 所有结果 -->
+          <transition-group name="slideBottom" tag="ul"  class="list">
+           <template v-for="i in list">
+              <li class="list-item" :key="i.id">
+                <h2 class="list-item-name">{{i.name}}</h2>
+                <p class="list-item-time">发布日期:{{i.time}}</p>
+              </li>
+           </template>
+          </transition-group>
       </main>
       </l-layer>
     </div>
@@ -45,18 +55,27 @@ export default class lSearch extends Vue {
   })
   queryFun!: () => void;
 
-  count = 0; //搜索结果
+  get count(){
+      return this.list.length;
+  }
+  list = [
+      {
+          id:1,
+          name:"拥抱Vue3.0",
+          time:"2020-1-2"
+      },
+      {
+          id:2,
+          name:"爱上typescript",
+          time:"2020-1-2"
+      }
+  ];
   value = ""; //输入值
 }
 </script>
 
 <style lang="scss" scoped>
 .l-search {
-  &-layer {
-    flex: 1;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-  }
   &-content {
     width: 20%;
     height: 100%;
@@ -74,7 +93,41 @@ export default class lSearch extends Vue {
     .input {
     }
     .result {
-      padding-top: 2em;
+      padding-top: 1em;
+    }
+    .list{
+      padding-top: 1.5em;
+      &-item{
+        position: relative;
+        cursor: pointer;
+        transition: width $g-transitionTime,transform $g-transitionTime ;
+
+        margin-bottom: 1em;
+        &-time{
+         font-weight: 700;
+         color: #777;
+        }
+        &-name{
+        font-size:1.5em;
+        line-height: 1.5em;
+        }
+        &:hover{
+          transform: translateY(-10%);
+        }
+        &:before{
+          content:"";
+          position: absolute;
+          bottom: -$g-gap;
+          left: 0;
+          width: 0%;
+          height: 1px;
+          transition: inherit;
+          background: $g-themeColor;
+        }
+        &:hover::before{
+          width: 100%;
+        }
+      }
     }
   }
 }
