@@ -11,7 +11,7 @@ function initRoute(app,config){
     p.succeed('🚀 路由初始化完成')
 }
 function initMiddleware(app){
-  app.use(require('./middleware/middleware-log'))
+  app.use(require('./middleware/log'))
 }
 module.exports = function(app,config){
  // 初始化模型 

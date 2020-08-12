@@ -51,6 +51,20 @@ const Rules = {
                 maximum: 10,
             },
         }
+    },
+    login: {
+        account: {
+            presence: {
+                allowEmpty: false,
+            },
+            type: "string",
+        },
+        password: {
+            presence: {
+                allowEmpty: false,
+            },
+            isNotCN: true
+        }
     }
 }
 // 扩展 校验函数
@@ -78,10 +92,20 @@ module.exports = {
         // 格式化传递过来的参数 tablename_props
         const target = mapping(info, 'user')
         const ins = await User.create(target);
-        
         return ins.toJSON()
     },
-    login() {
-
+    async login(info) {
+        // 数据校验 前端传递过来的loginId是经过 md5加密的
+        const isValid = await asyncValidate(info, Rules.login);
+        if (isValid !== true) return isValid;
+        const {password} = info;
+        const target = mapping(info,'user');
+        const result = await User.findOne({
+            where:target
+        })
+        if (result && result['user_password'] === password) {
+            return result.toJSON();
+          }
+         return null;
     }
 }

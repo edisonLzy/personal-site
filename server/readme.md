@@ -62,3 +62,39 @@ export function initAdmin() {
 ```
 
 ### 三层架构模型
+
+
+## 功能 
+
+### 注册 
+
+### 登陆
+
+#### 颁发JWT
+
+#### 认证JWT
+
+#### JWT
+
+### 文件上传
+
+#### 客户端
+
+- [x] http请求头 
+```js
+// Content-Type:multipart/form-data 多部分form-data MIME类型
+```
+- [x] 文件类型描述
+```js
+// Content-Disposition:form-data;
+// Content-Type:image/jpeg 类型
+```
+- [x] 传统的 form表单上传
+- [x] AJAX 上传
+```js
+// input type = file 通过files拿到文件对象
+const formData = new FormData();//构建form-data格式的消息题
+```
+#### 服务器端
+> multer: 解析 formData的请求体 
+- [x] cnpm i multer

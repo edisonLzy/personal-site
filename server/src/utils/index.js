@@ -16,3 +16,5 @@ exports.mapping = (obj, tableName, concat = '_') => {
  * @param {*} str 
  */
 exports.isNotCN = str => !Reg_CN.test(str);
+
+exports.getRandomStr = (length = 6)=> Math.random().toString(36).slice(length)

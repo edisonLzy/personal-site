@@ -4,6 +4,9 @@ node_modules
 /dist
 /client/node_modules
 /client/dist
+/admin/node_modules
+/admin/dist
 /server/node_modules
 /server/dist
 /server/src/logs
+/server/public

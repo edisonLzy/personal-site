@@ -1,0 +1,281 @@
+@import './var.scss';
+
+/* common */
+.l-bg-red {
+    background: #d89292;
+}
+
+.l-bg-fade {
+    background: #b3b3b3;
+}
+
+.l-bg-theme {
+    background: $g-themeColor;
+}
+
+.l-bg-green {
+    background: greenyellow;
+}
+
+.l-textColor-theme {
+    color: $g-themeColor;
+}
+
+.l-textColor-fade {
+    color: #b3b3b3;
+}
+
+.l-common-btn {
+    border-radius: $g-radius;
+    background: $g-themeColor;
+    transition: background-color $g-transitionTime;
+    color: #fff;
+    padding: .5em 2em;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #0371df;
+    }
+
+}
+
+.l-link {
+    color: $g-themeColor;
+    text-decoration: underline;
+}
+
+.l-pre {
+    // text-align: center;
+    font-weight: bold;
+    padding: .5em 0;
+}
+
+.l-line {
+    position: relative;
+
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 70%;
+        height: 0.5px;
+        transform: scale(1);
+        background-color: #CFCFCF;
+        transition: width .5s, background-color .5s;
+    }
+
+    &:hover::after {
+        width: 100%;
+        background-color: $g-themeColor;
+    }
+}
+
+.l-img {
+    height: 100%;
+}
+
+.l-img-c {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.l-title {
+    color: #fff;
+    font-size: 50px;
+}
+
+.l-cover {
+    width: 100%;
+    height: 100%;
+}
+
+.l-bannerTips {
+
+    &:hover::after {
+        background-color: #000;
+    }
+
+    &::after {
+        cursor: pointer;
+        content: attr(data-title);
+        font-size: 1vw;
+        position: absolute;
+        transform-origin: left;
+        transform: rotateZ(45deg);
+        transition: .5s;
+        right: -15%;
+        top: -5%;
+        width: 40%;
+        height: 5%;
+        background: #1E90FF;
+        color: #fff;
+        /* text-indent: 1em; */
+        text-align: center;
+    }
+}
+
+/* border */
+.l-border-bottom {
+    border-bottom: 1px solid $g-divideColor;
+}
+
+.l-circle {
+    border-radius: 50%;
+}
+
+/* position */
+.l-fixed-cover {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+.l-fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    width: 100%;
+}
+
+.l-absolute-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.l-absolute-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/* flex */
+.l-flex {
+    display: flex;
+}
+
+.l-flex-h-sb {
+    display: flex;
+    justify-content: space-between;
+}
+
+.l-flex-v {
+    display: flex;
+    flex-direction: column;
+}
+
+.l-flex-v-sb {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.l-flex-v-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.l-flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* grid */
+.l-grid {
+    display: grid;
+}
+
+/* animation */
+@keyframes fadeUp {
+    from {
+        transform: translateY(-30%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@for $i from 1 through 3 {
+    .fadeUp-#{$i} {
+        animation:fadeUp 1s linear #{$i*0.5}s
+    }
+}
+
+/* transition 动画*/
+
+.fadeIn-enter-active,
+.fadeIn-leave-active {
+    transition: .5s
+}
+
+.fadeIn-enter,
+.fadeIn-leave-to {
+    opacity: 0
+}
+
+.swiper-enter-to,
+.swiper-leave {
+    transform: translateX(0%);
+}
+.swiper-enter {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.swiper-leave-to {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.swiper-enter-active,
+.swiper-leave-active {
+    transition: .5s
+}
+
+.slide-enter-active,
+.slide-leave-active {
+    transition: .5s
+}
+
+.slide-enter,
+.slide-leave-to {
+    transform: translateX(10%);
+    opacity: 0
+}
+
+
+.slideLeft-enter-active,
+.slideLeft-leave-active {
+    transition: .5s
+}
+
+.slideLeft-enter,
+.slideLeft-leave-to {
+    transform: translateX(100%);
+    opacity: 0
+}
+
+.slideBottom-enter-active,
+.slideBottom-leave-active {
+    transition: $g-transitionTime;
+}
+
+.slideBottom-enter,
+.slideBottom-leave-to {
+    transform: translateY(40%);
+    opacity: 0
+}
