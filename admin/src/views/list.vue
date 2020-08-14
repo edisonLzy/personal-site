@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { getWhoami } from "@/api";
+import { getWhoami,getArticleList } from "@/api";
 export default {
   name: "list",
   data() {
@@ -23,6 +23,7 @@ export default {
   },
   methods: {},
   async mounted() {
+    await getArticleList({})
     let data = await getWhoami();
     this.avator = data.data.user_avator;
   },

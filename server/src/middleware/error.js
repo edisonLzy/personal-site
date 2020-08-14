@@ -2,7 +2,6 @@
 const getMsg = require("../utils/getSendResult");
 const multer = require("multer");
 module.exports = (err, req, res, next) => {
-console.log(err, req)
   if (err) {
     if (err instanceof multer.MulterError) {
       res.status(200).send(getMsg.getErr(err.message));

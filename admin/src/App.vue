@@ -36,4 +36,7 @@
     overflow: hidden;
   }
 }
+.el-select{
+  width: 50%;
+}
 </style>

@@ -14,9 +14,7 @@ module.exports = {
     {value: 'WIP',      name: 'WIP:      Work in progress'}
   ],
 
-  scopes: [
-    {name: 'performance'}
-  ],
+  scopes: [],
 
   // it needs to match the value for field type. Eg.: 'fix'
   /*

@@ -5,13 +5,13 @@ const route = Router()
 
 // 登陆
 route.post('/login', async (req, res) => {
-  const result = await userService.login(req.body);
-  if (!!result) {
-    let value = result.id;
+  const r = await userService.login(req.body);
+  if (!!r) {
+    let value = r.id;
     //登录成功
      publish(res, undefined, { id: value });
   }
-  res.send(result)
+  res.send(r)
 })
 // 注册
 route.post('/sign', async (req, res) => {

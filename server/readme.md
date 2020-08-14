@@ -66,17 +66,17 @@ export function initAdmin() {
 
 ## 功能 
 
-### 注册 
+### 注册 | 登陆
 
-### 登陆
+- [x] 颁发JWT
 
-#### 颁发JWT
+- [x] 认证JWT
 
-#### 认证JWT
-
-#### JWT
+- [x] JWT
 
 ### 文件上传
+
+- [x] 用户头像的上传
 
 #### 客户端
 
@@ -98,3 +98,24 @@ const formData = new FormData();//构建form-data格式的消息题
 #### 服务器端
 > multer: 解析 formData的请求体 
 - [x] cnpm i multer
+
+### 博文管理
+> Articles 表
+
+
+
+# GET
+
+## 时间处理
+
+# 错误记录
+
+- [x] Incorrect string value: '\xE9\x98\xBF\xE6\x92\x92...' 
+```sql
+1. 设置字符编码为 utf8
+2. 执行
+ALTER TABLE blog.article MODIFY article_title VARCHAR(10) CHARACTER SET "utf8";
+···
+
+- [x] Incorrect datetime value: '0000-00-00 00:00:00' for column 'createdAt' at row 1
+> 重新同步了 数据库

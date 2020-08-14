@@ -1,29 +1,32 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./db');
 module.exports = sequelize.define('Article', {
-    'Article_content': {
+    'article_title':{
+        type:DataTypes.STRING,
+        allowNull: false
+    },
+    'article_type':{
+        type:DataTypes.STRING,
+        allowNull: false
+    },
+    'article_html': {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    'Article_md': {
+    'article_md': {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    'Article_views': {
-        type: DataTypes.BIGINT,
+    'article_views': {
+        type: DataTypes.STRING,
         allowNull: false
     },
-    'Article_date': {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-    'Article_likes': {
-        type: DataTypes.BIGINT,
+    'article_likes': {
+        type: DataTypes.STRING,
         allowNull: false
     },
 },
     {
-        sequelize,
         paranoid: true,
     }
 )

@@ -1,10 +1,16 @@
 const pathtoRegexp = require("path-to-regexp");
 const { getErr } = require("../utils/getSendResult");
 const jwt = require("../utils/jwt");
-const serverConfig = require("../config/server.json")
+const serverConfig = require("../config/server.json");
+// 需要token的接口
 const needTokenApi = [
   { method: "POST", path: `${serverConfig.version}/user` },
   { method: "GET", path: `${serverConfig.version}/user/whoami` },
+  { method: "POST", path: `${serverConfig.version}/article/add` },
+  { method: "PUT", path: `${serverConfig.version}/article` },
+  { method: "DELETE", path: `${serverConfig.version}/article/:id` },
+  { method: "POST", path: `${serverConfig.version}/comment/add` },
+  { method: "DELETE", path: `${serverConfig.version}/comment/:id` },
 ];
 
 // 用于解析token
@@ -18,7 +24,6 @@ module.exports = (req, res, next) => {
     return;
   }
   const result = jwt.verify(req);
-  console.log(result)
   if (result) {
     //认证通过 所有具有权限的用户的所有请求 req对象中都会有一个userId字段
     req.userId = result.id;

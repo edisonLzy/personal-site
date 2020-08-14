@@ -75,7 +75,6 @@ validate.validators.accountExist = async function (v, o, k) {
             [`user_${k}`]: v
         }
     });
-    console.log(!c)
     if (!c) {
         return;
     }
