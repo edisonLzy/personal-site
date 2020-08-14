@@ -29,9 +29,11 @@ export default {
   methods: {
     async toLogin(form) {
       const r = await getLogin(form);
-      // this.$router.push({
-      //   name:'insert'
-      // })
+      if(!!r){
+        this.$router.push({
+        name:'insert'
+      })
+      }
     },
     async toSign(form) {
      const r = await getSign(form)

@@ -11,3 +11,8 @@ export async function getLogin(form:any){
     loading:true
   });
 }
+export async function getWhoami(){
+  return await request.get('v1/api/user/whoami',undefined,{
+    loading:true
+  });
+}

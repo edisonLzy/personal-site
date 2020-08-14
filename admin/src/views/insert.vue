@@ -1,5 +1,5 @@
 <template>
-  <l-container title="insert">
+  <l-container title="录入" :avator="avator">
     <mavon-editor v-model="content" ref="md" @change="change" style="min-height: 600px" />
     <!-- 提交确定区域 -->
     <section class="btns l-flex">
@@ -11,6 +11,7 @@
 
 <script>
 // 导入组件 及 组件样式
+import {getWhoami} from "@/api"
 import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
 export default {
@@ -21,6 +22,7 @@ export default {
   data() {
     return {
       content: "",
+      avator:""
     };
   },
   methods: {
@@ -36,6 +38,10 @@ export default {
       })
     },
   },
+  async mounted(){
+   let data = await getWhoami();
+    this.avator = data.data.user_avator;
+  }
 };
 </script>
 

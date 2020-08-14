@@ -1,19 +1,16 @@
 # 个人blog 后台管理
 
-> ant-design-vue + vue + axios
-## ant-design-vue
-- [x] 依赖 less-loader 所以需要下载less-loader
-- [x] 修改 vue.config.js
+> element + vue + axios
+
+## 路由全局守卫
+> 全局守卫属于VueRouter的实例
 ```js
-module.exports = {
-    css: {
-        loaderOptions: {
-          less: {
-              lessOptions:{
-                  javascriptEnabled: true,
-              }
-          }
-        }
-      }
-}
+const router = new VueRouter({
+  base: process.env.BASE_URL,
+  routes,
+});
+
+router.beforeEach((to, from, next)=>{
+
+})
 ```

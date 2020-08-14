@@ -107,5 +107,12 @@ module.exports = {
             return result.toJSON();
           }
          return null;
+    },
+    async whoami(id){
+    const result = await User.findByPk(id);
+    if (result) {
+        return result.toJSON();
+      }
+      return null;
     }
 }

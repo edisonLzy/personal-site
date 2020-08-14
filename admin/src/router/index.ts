@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-
+import Storage from "@/utils/localStorage"
 Vue.use(VueRouter);
 
 const routes: RouteConfig[] = [
   {
     path: '/',
     name: 'login',
-    component:  () => import(/* webpackChunkName: "about" */ '../views/login.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/login.vue'),
   },
   {
     path: '/insert',
@@ -26,4 +26,13 @@ const router = new VueRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  const { name: toName } = to;
+  const withAuth = Storage.has("token");
+  if (toName === 'login' || withAuth) {
+    next()
+  } else {
+    next({ name: 'login' })
+  }
+})
 export default router;

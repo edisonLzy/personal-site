@@ -18,4 +18,9 @@ route.post('/sign', async (req, res) => {
   const r = await userService.sign(req.body);
   res.send(r)
 })
+// 获取当前用户的信息
+route.get('/whoami', async (req, res) => {
+  const r = await userService.whoami(req.userId);
+  res.send(r)
+})
 module.exports  = route;
