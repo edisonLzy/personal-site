@@ -8,12 +8,20 @@
     <section class="blog-content l-flex-h-sb">
       <div class="blog-content-classify">
         <l-block title="特别推荐">
-          <l-list v-for="i in 5" :key="i" :index="i" @click="toDetail(i)"></l-list>
+          <template v-for="(it,index) in recommand">
+          <l-list 
+           :key="it.id" 
+           :index="index"
+           v-bind="it"
+           @click="toDetail(it)">
+           </l-list>
+          </template>
+
         </l-block>
 
-        <l-block title="最新发布">
+        <!-- <l-block title="最新发布">
           <l-list v-for="i in 5" :key="i"></l-list>
-        </l-block>
+        </l-block> -->
       </div>
 
       <aside class="blog-content-nav">
@@ -61,7 +69,7 @@ interface Tag {
   value: string;
 }
 import { Vue, Component } from "vue-property-decorator";
-import { getTag } from "@/api/blog";
+import { getTag,getRecommand} from "@/api";
 @Component({
     name: "blog",
 })
@@ -71,6 +79,7 @@ export default class Blog extends Vue {
       const { label, value } = tag;
       console.log(label, value);
   }
+  recommand:any[] = [];
   toDetail() {
       const i  =this.$Loading();
       i.start();
@@ -84,6 +93,8 @@ export default class Blog extends Vue {
   }
   async init() {
       this.tagList = await getTag();
+      const {data:{records =[]}} = await getRecommand();
+      this.recommand.push(...records);
   }
   mounted() {
       this.init();

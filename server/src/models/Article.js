@@ -1,6 +1,20 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./db');
+const {utcToLocal} =  require('../utils/time')
 module.exports = sequelize.define('Article', {
+    'article_cover':{
+        type:DataTypes.VIRTUAL,
+        get(){
+            return `http://localhost:3000/files/icon/${this.article_type}.jpg`
+        }
+    },
+    'time':{
+        type:DataTypes.VIRTUAL,
+        get(){
+            return utcToLocal(this.createdAt);
+        }
+        
+     },
     'article_title':{
         type:DataTypes.STRING,
         allowNull: false

@@ -1,7 +1,11 @@
-/*  首页  */
+import {request} from "@/request";
 // 特别推荐
 export async function getRecommand() {
-
+    return await request.get("v1/api/article",{
+        limit:4
+    },{
+        loading:true
+    });
 }
 // 最新发布
 export async function getPublish() {
@@ -40,3 +44,5 @@ export async function getTag() {
         }
     ];
 }
+
+

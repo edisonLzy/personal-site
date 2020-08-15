@@ -6,12 +6,12 @@
         'hot':index <= hotTop
       }]">{{index}}</i>
         <picture class="pic">
-          <img class="l-img-c" :src="imgSrc" alt="artcle img" />
+          <img class="l-img-c" :src="article_cover" alt="artcle img" />
         </picture>
       </section>
       <section class="l-list-right l-flex-v-sb">
-        <h3 class="l-list-right__title">{{title}}</h3>
-        <article class="l-list-right__desc">{{desc}}</article>
+        <h3 class="l-list-right__title">{{article_title}}</h3>
+        <article class="l-list-right__desc">{{article_desc}}</article>
         <ul class="l-list-right__info l-flex">
           <UserInfo v-for="(i,p) in info" :key="i" :item="{i,p}"></UserInfo>
         </ul>
@@ -24,6 +24,7 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 import UserInfo from "./userInfo";
 @Component({
     name: "l-list",
+    inheritAttrs:false,
     components: {
         UserInfo: UserInfo,
     },
@@ -40,20 +41,20 @@ export default class LList extends Vue {
       type: String,
       default: "https://blog.yzmcms.com/uploads/202007/05/200705121822383.png",
   })
-  imgSrc!: string;
+  article_cover!: string;
 
   @Prop({
       type: String,
       default: "ES6（ECMAScript2015）的出现",
   })
-  title!: string;
+  article_title!: string;
 
   @Prop({
       type: String,
       default:
       "ES6（ECMAScript2015）的出现，无疑给前端开发人员带来了新的惊喜，它包含了一些很棒的新特性，可以更加方便的实现很多复杂的操作，提高开发人员的效率。实际上, 它是一种新的javasES6（ECMAScript2015）的出现，无疑给前端开发人员带来了新的惊喜ES6（ECMAScript2015）的出现，无疑给前端开发人员带来了新的惊喜ES6（ECMAScript2015）的出现，无疑给前端开发人员带来了新的惊喜ES6（ECMAScript2015）的出现，无疑给前端开发人员带来了新的惊喜cript规范...",
   })
-  desc!: string;
+  article_desc!: string;
 
   @Prop({
       type: String,
@@ -71,14 +72,17 @@ export default class LList extends Vue {
       type: [String, Number],
       default: 187,
   })
-  views!: number;
+  article_views!: number;
 
   get info() {
       return {
           user: this.author,
           time: this.time,
-          view: this.views,
+          view: this.article_views,
       };
+  }
+  mounted() {
+      console.log(this.info); 
   }
 }
 </script>

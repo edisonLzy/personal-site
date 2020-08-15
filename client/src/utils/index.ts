@@ -43,8 +43,14 @@ export function performance(){
         onload:timing.loadEventEnd - start
     };
 }
-// 防抖 函数实现
 export type Immediate = true|false;
+/**
+ * 防抖 函数实现
+ * @param fn 
+ * @param delay 
+ * @param immediate 
+ * @param context 
+ */
 export function debounce(fn: any, delay: number, immediate:Immediate= true,context:any){
     // 不是函数 抛出错误
     if(typeof fn !== "function"){
@@ -66,7 +72,11 @@ export function debounce(fn: any, delay: number, immediate:Immediate= true,conte
     };
 }
 
-// 节流 函数实现
+/**
+ * 节流 函数实现
+ * @param fn 
+ * @param wait 
+ */
 export function throttle(fn:any,wait:number){
     let lastTime = 0;
     return function(...args:any[]){
@@ -77,4 +87,5 @@ export function throttle(fn:any,wait:number){
         }
     };   
 }
+
 

@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./db');
+const {utcToLocal,getDiffTime} =  require('../utils/time')
 module.exports = sequelize.define('Comment', {
     'comment_likes': {
         type: DataTypes.STRING,
@@ -14,7 +15,19 @@ module.exports = sequelize.define('Comment', {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue:-1
-    }
+    },
+    'fromNow':{
+        type:DataTypes.VIRTUAL,
+        get(){
+            return getDiffTime(this.createdAt);
+        }
+    },
+    'createTime':{
+        type:DataTypes.VIRTUAL,
+        get(){
+            return utcToLocal(this.createdAt);
+        }
+     }
 },
     {
         paranoid: true,

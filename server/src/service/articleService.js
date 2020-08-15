@@ -1,6 +1,7 @@
 const { asyncValidate, validate } = require('../utils/validate');
-const { Op} = require("sequelize");
+const { Op } = require("sequelize");
 const Article = require('../models/Article');
+const Comment = require('../models/Comment');
 const { mapping, formateReturn } = require('../utils');
 // 校验规则
 const Rules = {
@@ -85,20 +86,22 @@ module.exports = {
         const ins = await Article.create(target).catch(e => {
             console.log(e)
         });
-         return formateReturn(ins);
+        return formateReturn(ins);
     },
     async list({ page = 1, limit = 10, ...info }) {
-        const { type='', title='' } = info;
+        const { type = '', title = '' } = info;
         const isValidate = validate({ type, title }, Rules.list);
         if (!!isValidate) return isValidate;
         const result = await Article.findAndCountAll({
-            attributes: ["id", "article_title", "article_type", "article_views"],
+            attributes: ["id", "article_title", "article_type", "article_views","article_cover","createdAt","time"],
+            order: [['article_views', 'desc']],
             where: {
                 [Op.or]: [{
                     // 类型筛选
                     article_type: {
                         [Op.eq]: type,
-                    },
+                    }
+                }, {
                     // 文章title筛选
                     article_title: {
                         [Op.like]: `%${title}%`,
@@ -110,7 +113,7 @@ module.exports = {
         })
         return formateReturn({
             total: result.count,
-            data: JSON.parse(JSON.stringify(result.rows)),
+            records: JSON.parse(JSON.stringify(result.rows)),
         })
     },
     async detail(info) {
@@ -121,8 +124,11 @@ module.exports = {
             attributes: ["id", "article_title", "article_type", "article_html", "article_likes", "article_views", "createdAt"],
             where: {
                 id
-            }
+            },
+            include: Comment
         })
+        // 查询文章的评论
+        // const ref = await result.getComments();
         // 文章访问量处理  
         const data = result.toJSON();
         let count = data.article_views;
@@ -177,7 +183,7 @@ module.exports = {
         if (isValid !== true) return isValid;
         const { id } = info;
         await Article.destroy({
-            where:{
+            where: {
                 id
             }
         })

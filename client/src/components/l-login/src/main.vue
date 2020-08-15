@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import { Component, Vue, Model } from "vue-property-decorator";
-import {sign} from "@/api/blog";
+// import {sign} from "@/api";
 @Component({
     name: "l-login",
 })
@@ -91,7 +91,7 @@ export default class LLogin extends Vue {
   text = "213123";
 
   async comfirm(){
-      let data = await sign(this.signForm);
+      // let data = await sign(this.signForm);
   }
   cancel(){
 

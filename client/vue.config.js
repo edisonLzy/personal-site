@@ -10,6 +10,13 @@ module.exports = {
     lintOnSave: true,
     publicPath: "./",
     outputDir:"../dist/public",
+    devServer: {
+        proxy: {
+            "v1/api/": {
+                target: "http://localhost:3000"
+            },
+        }
+    },
     css: {
         sourceMap: true,
         loaderOptions: {

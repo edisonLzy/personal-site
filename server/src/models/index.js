@@ -20,13 +20,13 @@ function relation() {
             name: 'user_id'
         }
     });
-
+   
     User.hasMany(Comment, {
         foreignKey: {
             name: 'user_id'
         }
     });
-
+   
     Article.hasMany(Comment, {
         foreignKey: {
             name: 'article_id'

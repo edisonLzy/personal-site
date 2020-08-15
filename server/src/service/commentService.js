@@ -1,7 +1,7 @@
 const { asyncValidate, validate } = require('../utils/validate');
-const { Op,fn,col} = require("sequelize");
+const {col,cast} = require("sequelize");
 const Comment = require('../models/Comment');
-const { mapping, formateReturn } = require('../utils');
+const {formateReturn } = require('../utils');
 // 校验规则
 const Rules = {
     add: {
@@ -77,15 +77,19 @@ module.exports = {
         return formateReturn(true)
     },
     async list({ page = 1, limit = 10, ...info }) {
-        const { data='desc', likes='desc' } = info;
-
+        const { date='', likes='' } = info;
+        let order = [];
+        if(!!likes){
+            order = [cast(col('comment_likes'), 'SIGNED'), likes]
+        }
+        if(!!date){
+            order =  ["createdAt",date]
+        }
         const result = await Comment.findAndCountAll({
-            // order:[
-            //     [fn('max',col('comment_likes')),likes]
-            // ],
-            attributes: { exclude: ['updatedAt','deleteAt','article_id'] },
+            order: [order],
+            attributes: { exclude: ['updatedAt','deletedAt','article_id'] },
             offset: (page - 1) * limit,
-            limit: +limit,
+            limit: +limit
         })
         return formateReturn({
             total: result.count,

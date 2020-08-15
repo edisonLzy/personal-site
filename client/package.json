@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@types/echarts": "^4.6.4",
+    "@types/nprogress": "^0.2.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "nprogress": "^0.2.0",
     "svg-sprite-loader": "^5.0.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",

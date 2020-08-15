@@ -33,9 +33,9 @@ interface Tag {
   label: string;
   value: string;
 }
-import { Vue, Component,Mixins } from "vue-property-decorator";
+import { Component,Mixins } from "vue-property-decorator";
 import ReachBottom from "@/common/mixins/ReachBottom";
-import { getTag } from "@/api/blog";
+import { getTag } from "@/api";
 @Component({
     name: "essay",
 })

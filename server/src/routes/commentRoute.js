@@ -18,7 +18,7 @@ route.delete('/:id',async (req,res) =>{
     res.send(r)
 })
 route.get('/',async (req,res)=>{
-    const r = await commentService.list(req.body);
+    const r = await commentService.list(req.query);
     res.send(r)
 })
 module.exports = route;
