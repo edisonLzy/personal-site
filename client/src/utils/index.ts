@@ -87,5 +87,25 @@ export function throttle(fn:any,wait:number){
         }
     };   
 }
+/**
+ * 统一异常处理，返回正确的数据
+ */
+interface Return<T>{
+    msg:string
+    data:T,
+    code:number
+}
+export function returnData<T>(resp:Return<T>){
+    const {msg,data,code} = resp;
+    if(code === 1){
+        return data;
+    }else{
+        throw Error(msg);
+    }
+}
 
-
+export function flatItemInArray(data:any[]){
+    // return data.reduce((acc,item)=>{
+        
+    // },[]);
+}

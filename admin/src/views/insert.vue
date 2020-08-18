@@ -12,6 +12,9 @@
         <el-form-item prop="title">
           <el-input v-model="form.title" clearable placeholder="title:please enter your title"></el-input>
         </el-form-item>
+          <el-form-item prop="desc">
+       <el-input type="textarea" v-model="form.desc" placeholder="desc:please enter your desc"></el-input>
+       </el-form-item>
       </el-form>
     </section>
     <section class="md">
@@ -22,7 +25,7 @@
         v-model="form.md"
         ref="md"
         @change="change"
-        style="min-height: 600px"
+        style="max-height: 500px;max-width: 80vw;"
       />
     </section>
     <!-- 提交确定区域 -->
@@ -51,6 +54,7 @@ export default {
         type: "",
         md: "",
         html: "",
+        desc:""
       },
       types: [
         "typescript",
@@ -74,6 +78,13 @@ export default {
           {
             required: true,
             message: "please enter your title",
+            trigger: "blur",
+          },
+        ],
+         desc: [
+          {
+            required: true,
+            message: "please enter your desc",
             trigger: "blur",
           },
         ],

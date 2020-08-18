@@ -20,7 +20,13 @@ function relation() {
             name: 'user_id'
         }
     });
-   
+    Article.belongsTo(User,{
+        as:'user',
+        foreignKey:{
+            name: 'user_id'
+        }
+    })
+    
     User.hasMany(Comment, {
         foreignKey: {
             name: 'user_id'
@@ -28,11 +34,16 @@ function relation() {
     });
    
     Article.hasMany(Comment, {
+        as:'comment',
         foreignKey: {
             name: 'article_id'
         }
     })
-
+    Comment.belongsTo(Article,{
+        foreignKey:{
+            name:'article_id'
+        }
+    })
     Article.belongsToMany(Tag, {
         through: 'Articles_Tags_mapping',
     })

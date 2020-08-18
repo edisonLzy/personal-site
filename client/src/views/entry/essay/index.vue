@@ -8,7 +8,14 @@
     <section class="essay-content l-flex-h-sb">
       <div class="essay-content-classify">
         <l-block :title="article_title">
-          <l-list v-for="i in article_list" :key="i" :index="i" @click="toDetail"></l-list>
+        <template v-for="(it,index) in article_list">
+          <l-list 
+           :key="it.id" 
+           :index="++index"
+           v-bind="it"
+           @click="toDetail(it)">
+           </l-list>
+          </template>
         </l-block>
       </div>
       <aside class="essay-content-nav">
@@ -35,14 +42,14 @@ interface Tag {
 }
 import { Component,Mixins } from "vue-property-decorator";
 import ReachBottom from "@/common/mixins/ReachBottom";
-import { getTag } from "@/api";
+import { getTag,getAllList,ArticleListItem } from "@/api";
 @Component({
     name: "essay",
 })
 export default class Essay extends Mixins(ReachBottom) {
   tagList: Tag[] = [];
   article_title = "所有文章";
-  article_list = 15;
+  article_list:ArticleListItem[] = [];
   toList(tag: Tag) {
       const { label, value } = tag;
       this.article_title = label;
@@ -60,8 +67,15 @@ export default class Essay extends Mixins(ReachBottom) {
           name: "detail",
       });
   }
+  // 获取文章列表 
+  async getList(type:string = ""){
+      const data = await getAllList(type);
+      this.article_list.push(...data);
+      // console.log(data);
+  }
   async init() {
       this.tagList = await getTag();
+      this.getList();
   }
   onBottom(){
       const i = this.$Loading();

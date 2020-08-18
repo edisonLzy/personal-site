@@ -1,7 +1,8 @@
 const { asyncValidate, validate } = require('../utils/validate');
-const { Op } = require("sequelize");
+const { Op,cast,col } = require("sequelize");
 const Article = require('../models/Article');
 const Comment = require('../models/Comment');
+const User = require('../models/User');
 const { mapping, formateReturn } = require('../utils');
 // 校验规则
 const Rules = {
@@ -22,6 +23,11 @@ const Rules = {
             }
         },
         html: {
+            presence: {
+                allowEmpty: false,
+            }
+        },
+        desc: {
             presence: {
                 allowEmpty: false,
             }
@@ -77,24 +83,26 @@ module.exports = {
         // 数据校验
         const isValid = await asyncValidate(info, Rules.add);
         if (isValid !== true) return isValid;
-        const initial = {
-            views: '0',
-            likes: '0'
-        }
-        const target = mapping({ ...info, ...initial }, 'article');
+        const target = mapping(info, 'article');
         target['user_id'] = req.userId;
-        const ins = await Article.create(target).catch(e => {
-            console.log(e)
-        });
+        const ins = await Article.create(target);
         return formateReturn(ins);
     },
     async list({ page = 1, limit = 10, ...info }) {
-        const { type = '', title = '' } = info;
+        const { type = '', title = '', views='',date = '' } = info;
         const isValidate = validate({ type, title }, Rules.list);
         if (!!isValidate) return isValidate;
+        // 排序
+        let order = [];
+        if(!!views){
+            order.push([cast(col('article_views'), 'SIGNED'), views])
+        }
+        if(!!date){
+            order.push(["createdAt",date])
+        }
         const result = await Article.findAndCountAll({
-            attributes: ["id", "article_title", "article_type", "article_views","article_cover","createdAt","time"],
-            order: [['article_views', 'desc']],
+            attributes: ["id","article_desc","article_title", "article_type", "article_views","article_cover","createdAt","time"],
+            order,
             where: {
                 [Op.or]: [{
                     // 类型筛选
@@ -108,6 +116,11 @@ module.exports = {
                     }
                 }]
             },
+            include:[{
+                model:User,
+                as:'user',
+                attributes:['user_name']
+            }],
             offset: (page - 1) * limit,
             limit: +limit,
         })
@@ -121,11 +134,17 @@ module.exports = {
         if (!!isValidate) return isValidate;
         const { id } = info;
         const result = await Article.findOne({
-            attributes: ["id", "article_title", "article_type", "article_html", "article_likes", "article_views", "createdAt"],
+            attributes: ["id", "article_title", "article_type", "article_html", "article_likes", "article_views","time"],
             where: {
                 id
             },
-            include: Comment
+            include: [
+            {
+                model:User,
+                as:'user',
+                attributes:["user_name"]
+            }
+        ]
         })
         // 查询文章的评论
         // const ref = await result.getComments();

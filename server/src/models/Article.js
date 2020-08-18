@@ -33,14 +33,20 @@ module.exports = sequelize.define('Article', {
     },
     'article_views': {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue:'0'
     },
     'article_likes': {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue:'0'
     },
+    'article_desc':{
+        type: DataTypes.TEXT,
+        allowNull: false
+    }
 },
     {
-        paranoid: true,
+        paranoid: true
     }
 )

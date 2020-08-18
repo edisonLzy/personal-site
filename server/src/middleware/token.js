@@ -9,7 +9,7 @@ const needTokenApi = [
   { method: "POST", path: `${serverConfig.version}/article/add` },
   { method: "PUT", path: `${serverConfig.version}/article` },
   { method: "DELETE", path: `${serverConfig.version}/article/:id` },
-  { method: "POST", path: `${serverConfig.version}/comment/add` },
+  // { method: "POST", path: `${serverConfig.version}/comment/add` },
   { method: "DELETE", path: `${serverConfig.version}/comment/:id` },
 ];
 

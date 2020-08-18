@@ -11,7 +11,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
     },
     define: {
         // 解决中文录入的问题
-        'charset':'utf8'
+        'charset':'utf8mb4'
     }
 });
 

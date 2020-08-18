@@ -18,60 +18,72 @@
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from "vue-property-decorator";
 @Component({
-  name: "l-like",
+    name: "l-like",
 })
 export default class lLike extends Vue {
   static componentname = "l-like";
-  config = [
-    {
-      icon: "like",
-      title: "点赞",
-      badge: 1,
-      isActive: false,
-    },
-    {
-      icon: "comment",
-      title: "评论",
-      badge: 1,
-      isActive: false,
-    },
-    {
-      icon: "collection",
-      title: "收藏",
-      badge: 3,
-      isActive: false,
-    },
-  ];
-  like(index){
-    const isActive = this.config[index].isActive;
-    this.config[index].isActive = !isActive;
-    let badge = this.config[index].badge;
-   this.config[index].badge = isActive?--badge:++badge;
-    return this.config[index]
+  @Prop({
+      type:[Number,String],
+      default:0
+  })
+  article_likes!:number;
+  
+  @Prop({
+      type:Number,
+      default:0
+  })
+  article_comments!:number;
+
+
+  get config(){
+      return   [
+          {
+              icon: "like",
+              title: "点赞",
+              badge: this.article_likes,
+              isActive: false,
+          },
+          {
+              icon: "comment",
+              title: "评论",
+              badge: this.article_comments,
+              isActive: false,
+          },
+          {
+              icon: "collection",
+              title: "收藏",
+              badge: 3,
+              isActive: false,
+          },
+      ];
+  }
+  like(index:number){
+      const isActive = this.config[index].isActive;
+      this.config[index].isActive = !isActive;
+      let badge = this.config[index].badge;
+      this.config[index].badge = isActive?--badge:++badge;
+      return this.config[index];
   }
   comment(){
    
   }
-  collection(index){
-    const isActive = this.config[index].isActive;
-    this.config[index].isActive = !isActive;
-    let badge = this.config[index].badge;
-    this.config[index].badge = isActive?--badge:++badge;
-    return this.config[index]
+  collection(index:number){
+      const isActive = this.config[index].isActive;
+      this.config[index].isActive = !isActive;
+      let badge = this.config[index].badge;
+      this.config[index].badge = isActive?--badge:++badge;
+      return this.config[index];
   }
   @Emit("click")
-  toggle(i) {
-    switch(i){
-        case 0 :
-        return this.like(0);
-        break;
-        case 1:
-        return this.comment();
-        break;
-        case 2:
-        return this.collection(2);
-        break;
-    }
+  toggle(i:number) {
+      switch(i){
+      case 0 :
+          return this.like(0);
+      case 1:
+          return this.comment();
+      case 2:
+          return this.collection(2);
+      }
 
   }
 }

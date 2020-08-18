@@ -7,6 +7,11 @@ module.exports = sequelize.define('Comment', {
         allowNull: false,
         defaultValue:'0'
     },
+    'comment_name':{
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue:'User'
+    },
     'comment_content': {
         type: DataTypes.STRING(256),
         allowNull: false
@@ -15,6 +20,14 @@ module.exports = sequelize.define('Comment', {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue:-1
+    },
+    'level':{
+        type: DataTypes.VIRTUAL,
+        get(){
+        //根据parent-id来确定层级
+        return this.comment_parent_id=='-1'?0:1;
+        }
+        
     },
     'fromNow':{
         type:DataTypes.VIRTUAL,

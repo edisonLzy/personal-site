@@ -2,12 +2,12 @@
   <li :class="`l-comment-item level-${level}`">
     <div class="l-flex">
       <section class="list-item-avator">
-        <img :src="$attrs.avator" alt="头像" class="l-img" />
+        <img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2536151297,2163830430&fm=26&gp=0.jpg" alt="头像" class="l-img" />
       </section>
       <section class="list-item-content">
-        <h3 class="name l-textColor-theme">{{$attrs.name}}</h3>
-        <p class="time l-textColor-fade">{{$attrs.time}}</p>
-        <p class="content">{{$attrs.content}}</p>
+        <h3 class="name l-textColor-theme">{{$attrs.comment_name}}</h3>
+        <p class="time l-textColor-fade">{{$attrs.fromNow}}</p>
+        <p class="content">{{$attrs.comment_content}}</p>
       </section>
     </div>
     <section class="list-item-btn l-flex">

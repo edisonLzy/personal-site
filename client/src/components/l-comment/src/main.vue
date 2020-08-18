@@ -3,12 +3,12 @@
     <section class="l-comment-input">
       <!-- info -->
       <div class="input-header l-flex">
-        <l-input class="input" label="昵称" placeholder="请输入您的昵称" v-model="comment.name"></l-input>
-        <l-input class="input" label="邮箱" placeholder="请输入您的昵称" v-model="comment.email"></l-input>
+        <l-input class="input" label="昵称" placeholder="请输入您的昵称" v-model="comment.comment_name"></l-input>
+        <l-input class="input" label="邮箱" placeholder="请输入您的邮箱" v-model="comment.email"></l-input>
       </div>
       <!-- 输入评论 -->
       <div class="input-content">
-        <textarea class="textarea" placeholder="请您理智发言，共建美好社会" :value="comment.content"></textarea>
+        <textarea class="textarea" placeholder="请您理智发言，共建美好社会" v-model="comment.comment_content"></textarea>
       </div>
       <!-- 提交 -->
       <div class="input-footer l-flex">
@@ -28,7 +28,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop, Emit } from "vue-property-decorator";
 import item from "./item.vue";
 @Component({
     name: "l-comment",
@@ -42,45 +42,23 @@ export default class LComment extends Vue {
       type: Array,
       default: () => []
   })
-  commentList =[{
-      id: 1,
-      level:0,
-      avator:
-          "https://gravatar.loli.net/avatar/c307fc60ff5bc2fb05fbf2866900165b?d=mp&v=1.4.4",
-      name: "leezhiyu",
-      time: "2020-03-03",
-      content: "赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达",
-  },{
-      id: 2,
-      level:0,
-      avator:
-          "https://gravatar.loli.net/avatar/c307fc60ff5bc2fb05fbf2866900165b?d=mp&v=1.4.4",
-      name: "leezhiyu",
-      time: "2020-03-03",
-      content: "赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达",
-      childrens:[{
-          id: 3,
-          parentId:2,
-          level:1,
-          avator:
-          "https://gravatar.loli.net/avatar/c307fc60ff5bc2fb05fbf2866900165b?d=mp&v=1.4.4",
-          name: "leezhiyu",
-          time: "2020-03-03",
-          content: "赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达赛道函数撒大声点阿萨德萨达萨达",
-      }]
-  }
-  ];
+  commentList!:any[];
+
   comment = {
-      name: "",
+      comment_name: "",
       email: "",
-      content: "请输入",
+      comment_content: "",
   };
+  text = "";
   get count() {
       return `${this.commentList.length} 评论`;
   }
 
   // 提交
-  sub() {}
+  @Emit("sub")
+  sub() {
+      return this.comment;
+  }
 }
 </script>
 <style lang="scss" scoped>

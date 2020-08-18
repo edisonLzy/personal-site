@@ -11,17 +11,23 @@
           <template v-for="(it,index) in recommand">
           <l-list 
            :key="it.id" 
-           :index="index"
+           :index="++index"
            v-bind="it"
            @click="toDetail(it)">
            </l-list>
           </template>
-
         </l-block>
 
-        <!-- <l-block title="最新发布">
-          <l-list v-for="i in 5" :key="i"></l-list>
-        </l-block> -->
+        <l-block title="最新发布">
+        <template v-for="(it,index) in lastest">
+          <l-list 
+           :key="it.id" 
+           :index="++index"
+           v-bind="it"
+           @click="toDetail(it)">
+           </l-list>
+          </template>
+        </l-block>
       </div>
 
       <aside class="blog-content-nav">
@@ -69,7 +75,7 @@ interface Tag {
   value: string;
 }
 import { Vue, Component } from "vue-property-decorator";
-import { getTag,getRecommand} from "@/api";
+import { getTag,getRecommand,getPublish,getLastestComment,ArticleComment} from "@/api";
 @Component({
     name: "blog",
 })
@@ -80,21 +86,27 @@ export default class Blog extends Vue {
       console.log(label, value);
   }
   recommand:any[] = [];
-  toDetail() {
-      const i  =this.$Loading();
-      i.start();
-      setTimeout(function(){
-          i.close();
-      },2000);
-      
+  lastest:any[] = [];
+  lastestComment:ArticleComment[] = [];
+  toDetail(it:any) {
       this.$router.push({
-          name: "detail",
+          path: "detail",
+          query:{
+              id:it.id + ""
+          }
       });
   }
   async init() {
       this.tagList = await getTag();
-      const {data:{records =[]}} = await getRecommand();
-      this.recommand.push(...records);
+      const data = await getRecommand();
+      this.recommand.push(...data);
+      const _data = await getPublish();
+      this.lastest.push(..._data);
+      const com = await getLastestComment();
+      console.log(com);
+      this.lastestComment.push(...com);
+      console.log(this.lastestComment);
+      
   }
   mounted() {
       this.init();
