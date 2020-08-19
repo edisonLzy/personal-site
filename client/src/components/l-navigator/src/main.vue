@@ -3,9 +3,9 @@
     <nav>
       <!-- 展开按钮 -->
       <section class="menu" @click="toggleMenu">
-        <span class="fas fa-bars"></span>
+         <l-icon  iconClass="expand"></l-icon>
       </section>
-      <section class="logo">
+      <section class="logo" @click="toHome">
         <slot name="logo">
           <h1>LOGO</h1>
         </slot>
@@ -18,7 +18,7 @@
 
       <section class="search" @click="search">
         <slot name="search">
-          <span class="fas fa-search"></span>
+          <l-icon  iconClass="search"></l-icon>
         </slot>
       </section>
     </nav>
@@ -58,6 +58,11 @@ export default class LNavigator extends Vue {
       if (e.target.tagName === "A") {
           this.menuVisible = false;
       }
+  }
+  toHome(){
+      this.$router.push({
+          name:"home"
+      });
   }
   @Emit("search")
   search() {}

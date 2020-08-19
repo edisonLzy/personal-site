@@ -7,8 +7,13 @@
     <main class="main">
       <!-- 内容展示区域 -->
     <transition name="slide" mode="out-in">
-        <router-view></router-view>
+        <router-view ></router-view>
     </transition>
+
+     <!-- footer -->
+     <l-forward title="Fear no one">
+       <!-- <span>Only stronger survice</span> -->
+     </l-forward>
     </main>
      
       <!-- 回到顶部 -->
@@ -16,17 +21,17 @@
       <!-- 搜索组件 -->
       <l-search 
       v-model="visible" 
-      :queryFun="queryFunc"></l-search>
+      @click="toDetail"
+      ></l-search>
       <!-- 登陆组件 -->
       <l-login v-model="loginVisible"></l-login>
-      <!-- footer -->
-     <l-forward title="Fear no one"></l-forward>
   </div>
 </template>
 
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
+import {ArticleListItem} from "@/api/Home";
 @Component({
     name: "entry"
 })
@@ -60,8 +65,14 @@ export default class Entry extends Vue {
   login(){
       this.loginVisible = true;
   }
-  queryFunc(){
-
+  // 点击搜索结果
+  toDetail(it:ArticleListItem){
+      this.$router.push({
+          path: "detail",
+          query:{
+              id:it.id + ""
+          }
+      });
   }
 }
 </script>
@@ -75,9 +86,10 @@ export default class Entry extends Vue {
   }
   .main {
     padding-top: 80px;
+    padding-bottom: 20px;
     width: 90%;
     margin:0 auto;
-
+  
     @media (max-width: 1140px) {
       width: 98%;
     }

@@ -1,6 +1,7 @@
 <template>
    <footer class="l-forward">
      <span>{{title}}</span>
+     <p><slot></slot></p>
    </footer>
 </template>
 
@@ -21,9 +22,12 @@ export default class LForward extends Vue {
 
 <style lang="scss" scoped>
 .l-forward {
+  margin-top: $g-gap;
  padding: 2vw 0;
  font-size: 1.5em;
  color: #ccc;
  text-align: center;
+ background: #fff;
+   border-radius: $g-radius;
 }
 </style>

@@ -39,12 +39,17 @@
 
 
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Watch } from "vue-property-decorator";
 import { getDetail,getComment,setComment,setLike,ArticleDetail,ArticleComment,ArticleCommentVal } from "@/api";
+import { Route } from "vue-router";
 @Component({
     name: "detail",
 })
 export default class Detail extends Vue {
+@Watch("$route")
+    onRoute(){
+        this.init();
+    }
   info:ArticleDetail = {
       article_title: "当 Vue3 遇上 TypeScript 和 TSX",
       name: "LEEZHIYU",

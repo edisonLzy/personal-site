@@ -1,6 +1,7 @@
 const { asyncValidate, validate } = require('../utils/validate');
 const {col,cast} = require("sequelize");
 const Comment = require('../models/Comment');
+const Article = require('../models/Article');
 const {formateReturn } = require('../utils');
 // 校验规则
 const Rules = {
@@ -112,7 +113,12 @@ module.exports = {
             where,
             attributes: { exclude: ['updatedAt','deletedAt'] },
             offset: (page - 1) * limit,
-            limit: +limit
+            limit: +limit,
+            include:[{
+                model:Article,
+                as:'article',
+                attributes:['article_title']
+            }]
         })
         return formateReturn({
             total: result.count,

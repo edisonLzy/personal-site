@@ -46,3 +46,7 @@ exports.formateReturn = v => {
         code: 0
     }
 }
+exports.toLowerCase = v=>{
+    if(!v && typeof v !== 'string')return '';
+    return v.toLocaleLowerCase()
+}

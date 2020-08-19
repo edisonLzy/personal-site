@@ -3,7 +3,7 @@ const { Op,cast,col } = require("sequelize");
 const Article = require('../models/Article');
 const Comment = require('../models/Comment');
 const User = require('../models/User');
-const { mapping, formateReturn } = require('../utils');
+const { mapping, formateReturn,toLowerCase } = require('../utils');
 // 校验规则
 const Rules = {
     add: {
@@ -100,22 +100,22 @@ module.exports = {
         if(!!date){
             order.push(["createdAt",date])
         }
+        // 筛选
+        let where = {};
+        if(!!type){
+            where.article_type = {
+                [Op.eq]: toLowerCase(type),
+            }
+        }
+        if(!!title){
+            where.article_title = {
+                [Op.like]: `%${toLowerCase(title)}%`,
+            }
+        }
         const result = await Article.findAndCountAll({
             attributes: ["id","article_desc","article_title", "article_type", "article_views","article_cover","createdAt","time"],
             order,
-            where: {
-                [Op.or]: [{
-                    // 类型筛选
-                    article_type: {
-                        [Op.eq]: type,
-                    }
-                }, {
-                    // 文章title筛选
-                    article_title: {
-                        [Op.like]: `%${title}%`,
-                    }
-                }]
-            },
+            where,
             include:[{
                 model:User,
                 as:'user',

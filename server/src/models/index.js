@@ -40,6 +40,7 @@ function relation() {
         }
     })
     Comment.belongsTo(Article,{
+        as:'article',
         foreignKey:{
             name:'article_id'
         }

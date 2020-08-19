@@ -114,6 +114,7 @@ export default class lLike extends Vue {
     cursor: pointer;
     background: #fff;
     margin-bottom: 1em;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
     &::after {
       position: absolute;
       content: attr(badge);

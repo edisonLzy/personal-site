@@ -13,7 +13,7 @@
            :key="it.id" 
            :index="++index"
            v-bind="it"
-           @click="toDetail(it)">
+           @click="toDetail(it.id)">
            </l-list>
           </template>
         </l-block>
@@ -24,44 +24,36 @@
            :key="it.id" 
            :index="++index"
            v-bind="it"
-           @click="toDetail(it)">
+           @click="toDetail(it.id)"
+           >
            </l-list>
           </template>
         </l-block>
       </div>
 
       <aside class="blog-content-nav">
-        <l-block title="所有标签">
-          <ul class="content-nav">
+        <l-block title="TODAY">
+          <!-- <ul class="content-nav">
             <l-tag
               v-for="item in tagList"
               :key="item.label"
               :tag="item.label"
               @click="toList(item)"
             ></l-tag>
-          </ul>
+          </ul> -->
         </l-block>
 
-        <l-block title="最新评论">
-          <ul class="content-nav">
-            <l-tag
-              v-for="item in tagList"
-              :key="item.label"
-              :tag="item.label"
-              @click="toList(item)"
-            ></l-tag>
-          </ul>
+        <l-block title="LASTEST-COMMENT">
+            <HomeComment
+             v-for="i in lastestComment"
+             :key="i.id"
+             v-bind="i"
+             @click="toDetail(i.article_id)"
+             ></HomeComment>
         </l-block>
 
-        <l-block title="查看最多">
-          <ul class="content-nav">
-            <l-tag
-              v-for="item in tagList"
-              :key="item.label"
-              :tag="item.label"
-              @click="toList(item)"
-            ></l-tag>
-          </ul>
+        <l-block title="PageView">
+
         </l-block>
       </aside>
     </section>
@@ -76,8 +68,12 @@ interface Tag {
 }
 import { Vue, Component } from "vue-property-decorator";
 import { getTag,getRecommand,getPublish,getLastestComment,ArticleComment} from "@/api";
+import HomeComment from "@/common/components/home/comment.vue";
 @Component({
     name: "blog",
+    components:{
+        HomeComment
+    }
 })
 export default class Blog extends Vue {
   tagList: Tag[] = [];
@@ -88,11 +84,11 @@ export default class Blog extends Vue {
   recommand:any[] = [];
   lastest:any[] = [];
   lastestComment:ArticleComment[] = [];
-  toDetail(it:any) {
+  toDetail(id:any) {
       this.$router.push({
           path: "detail",
           query:{
-              id:it.id + ""
+              id:id + ""
           }
       });
   }
@@ -103,9 +99,7 @@ export default class Blog extends Vue {
       const _data = await getPublish();
       this.lastest.push(..._data);
       const com = await getLastestComment();
-      console.log(com);
       this.lastestComment.push(...com);
-      console.log(this.lastestComment);
       
   }
   mounted() {

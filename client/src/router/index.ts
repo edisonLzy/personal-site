@@ -3,6 +3,11 @@ import VueRouter, { RouteConfig, Route } from "vue-router";
 
 Vue.use(VueRouter);
 
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location:string) {
+    return originalPush.call(this, location).catch(err => err);
+};
+
 const routes: Array<RouteConfig> = [
     {
         path: "/home",

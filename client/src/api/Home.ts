@@ -9,12 +9,13 @@ export interface ArticleListItem{
     article_views:string
     time:string
     user_name:string
+    id:number
 }
 // 获取最新评论
 export async function getLastestComment(){
     const {data,code,msg} = await request.get("v1/api/comment",{
         limit:4,
-        views:"desc"
+        date:"desc"
     },{
         loading:true
     });

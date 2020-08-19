@@ -28,6 +28,7 @@
   </div>
 </template>
 <script lang="ts">
+import {clearObj} from "@/utils";
 import { Component, Vue, Prop, Emit } from "vue-property-decorator";
 import item from "./item.vue";
 @Component({
@@ -57,7 +58,9 @@ export default class LComment extends Vue {
   // 提交
   @Emit("sub")
   sub() {
-      return this.comment;
+      const _f = {...this.comment};
+      this.comment = clearObj(this.comment);
+      return _f;
   }
 }
 </script>

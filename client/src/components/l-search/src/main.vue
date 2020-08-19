@@ -18,8 +18,11 @@
         <!-- 所有结果 -->
           <transition-group name="slideBottom" tag="ul"  class="list">
            <template v-for="i in list">
-              <li class="list-item" :key="i.id">
-                <h2 class="list-item-name">{{i.name}}</h2>
+              <li 
+              @click="clickItem(i)"
+              class="list-item" 
+              :key="i.id">
+                <h2 class="list-item-name">{{i.article_title}}</h2>
                 <p class="list-item-time">发布日期:{{i.time}}</p>
               </li>
            </template>
@@ -32,7 +35,9 @@
 
 <script lang="ts">
 import {scroll} from "@/utils/window";
-import { Vue, Component, Prop, Model,Watch } from "vue-property-decorator";
+import {debounce} from "@/utils";
+import { Vue, Component, Model,Watch, Emit } from "vue-property-decorator";
+import {getAllList} from "@/api";
 @Component({
     name: "l-search",
 })
@@ -49,28 +54,26 @@ export default class lSearch extends Vue {
   close() {
       this.$emit("input", false);
   }
-  @Prop({
-      type: Function,
-      required: true,
-  })
-  queryFun!: () => void;
-
   get count(){
       return this.list.length;
   }
-  list = [
-      {
-          id:1,
-          name:"拥抱Vue3.0",
-          time:"2020-1-2"
-      },
-      {
-          id:2,
-          name:"爱上typescript",
-          time:"2020-1-2"
-      }
-  ];
+  list = [];// 结果数组
   value = ""; //输入值
+  searchFn = debounce(getAllList,500,false,this);
+  @Watch("value")
+  async onValue(val:string){
+      if(val===""){
+          this.list = [];
+          return;
+      }
+      const data:any = await this.searchFn(undefined,val);
+      this.list = data;
+  }
+  @Emit("click")
+  clickItem(i:any){
+      this.close();
+      return i;
+  }
 }
 </script>
 
@@ -101,7 +104,6 @@ export default class lSearch extends Vue {
         position: relative;
         cursor: pointer;
         transition: width $g-transitionTime,transform $g-transitionTime ;
-
         margin-bottom: 1em;
         &-time{
          font-weight: 700;

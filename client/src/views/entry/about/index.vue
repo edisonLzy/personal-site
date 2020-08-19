@@ -124,6 +124,9 @@ export default class About extends Vue {
     border-radius: $g-radius;
     height: calc(100vh - 160px);
     background: linear-gradient(45deg, $g-themeColor, #d89292);
+      @media (max-width: 1140px) {
+       display: none;
+      }
   }
   &-introduction {
     &-item {

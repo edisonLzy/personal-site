@@ -25,7 +25,7 @@
               v-for="item in tagList"
               :key="item.label"
               :tag="item.label"
-              @click="toList(item)"
+              @click="filterList(item)"
             ></l-tag>
           </ul>
         </l-block>
@@ -50,39 +50,37 @@ export default class Essay extends Mixins(ReachBottom) {
   tagList: Tag[] = [];
   article_title = "所有文章";
   article_list:ArticleListItem[] = [];
-  toList(tag: Tag) {
-      const { label, value } = tag;
+  filterList(tag: Tag) {
+      const { label,value } = tag;
+      this.article_list = [];
       this.article_title = label;
-      this.article_list = this.article_list === 2 ? 10 : 2;
-      console.log(value);
+      this.getList(value);
+      
   }
-  toDetail() {
-      const i = this.$Loading();
-      i.start();
-      setTimeout(function () {
-          i.close();
-      }, 2000);
-
+  toDetail(it:any) {
       this.$router.push({
-          name: "detail",
+          path: "detail",
+          query:{
+              id:it.id + ""
+          }
       });
   }
   // 获取文章列表 
   async getList(type:string = ""){
       const data = await getAllList(type);
       this.article_list.push(...data);
-      // console.log(data);
   }
   async init() {
       this.tagList = await getTag();
       this.getList();
   }
   onBottom(){
-      const i = this.$Loading();
-      i.start();
-      setTimeout(function () {
-          i.close();
-      }, 2000);
+      // const i = this.$Loading();
+      // i.start();
+      // setTimeout(function () {
+      //     i.close();
+      // }, 2000);
+      console.log("---");
 
   }
   mounted() {

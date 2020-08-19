@@ -42,8 +42,8 @@ export default class lToTop extends Vue {
 .l-toTop {
     flex-direction: column;
     position:fixed;
-    bottom:5vw;
-    right:5vw;
+    bottom:15%;
+    right:4%;
     color: #8590a6;
     background:#fff;
     border-radius:$g-radius;
