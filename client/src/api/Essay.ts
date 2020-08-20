@@ -1,11 +1,12 @@
 import {request} from "@/request";
 import {returnData} from "@/utils/index";
 import {ArticleListItem} from "./Home";
-export async function getAllList(type:string="",title:string = ""){
+export async function getAllList(type:string="",title:string = "",limit = 10){
     const {data,code,msg} = await request.get("v1/api/article",{
         views:"desc",
         type,
-        title
+        title,
+        limit
     },{
         loading:true
     });

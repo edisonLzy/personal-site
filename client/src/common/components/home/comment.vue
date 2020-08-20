@@ -1,6 +1,6 @@
 <template>
   <transition appear name="slide">
-    <li class="comment l-flex" v-on="$listeners">
+    <li class="comment l-flex l-hover" v-on="$listeners">
       <section class="comment-avator">
         <img
           src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2536151297,2163830430&fm=26&gp=0.jpg"

@@ -25,7 +25,7 @@ export function ReachBottom(dis = 10) {
     return sT + sH >= cH;
 }
 // 获取滚动条的高度
-export function getScrollTop() {
+export function getScrollTop():number {
     if (document.documentElement.scrollTop) {
         getScrollTop = () => document.documentElement.scrollTop;
     } else if (document.body.scrollTop) {

@@ -1,9 +1,9 @@
 const { asyncValidate, validate } = require('../utils/validate');
-const { Op,cast,col } = require("sequelize");
+const { Op,cast,col,fn } = require("sequelize");
 const Article = require('../models/Article');
 const Comment = require('../models/Comment');
 const User = require('../models/User');
-const { mapping, formateReturn,toLowerCase } = require('../utils');
+const { mapping, formateReturn,toLowerCase ,sum,strToArr} = require('../utils');
 // 校验规则
 const Rules = {
     add: {
@@ -103,8 +103,9 @@ module.exports = {
         // 筛选
         let where = {};
         if(!!type){
+            const arr = strToArr(type).map(toLowerCase);
             where.article_type = {
-                [Op.eq]: toLowerCase(type),
+                [Op.in]:arr
             }
         }
         if(!!title){
@@ -113,7 +114,8 @@ module.exports = {
             }
         }
         const result = await Article.findAndCountAll({
-            attributes: ["id","article_desc","article_title", "article_type", "article_views","article_cover","createdAt","time"],
+            attributes: [
+                "id","article_desc","article_likes","article_title", "article_type", "article_views","article_cover","createdAt","time"],
             order,
             where,
             include:[{
@@ -124,9 +126,10 @@ module.exports = {
             offset: (page - 1) * limit,
             limit: +limit,
         })
+        const _total = JSON.parse(JSON.stringify(result.rows));
         return formateReturn({
             total: result.count,
-            records: JSON.parse(JSON.stringify(result.rows)),
+            records: _total,
         })
     },
     async detail(info) {
@@ -207,6 +210,36 @@ module.exports = {
             }
         })
         return formateReturn(true)
-    }
+    },
+    async analyze(){
+         // 总 访问量 点赞树 评论数
+         // 每种类型的 访问量 点赞树 评论数
+         
+         const result = await Article.findAll({
+            attributes: [
+              ['article_type','type'],
+              [fn('sum', col('article_views')),'views'],
+              [fn('sum', col('article_likes')),'likes'],
+              [fn('count', col('article_type')),'count']
+            ],
+            // include:[
+            //    { 
+            //     model:Comment,
+            //     as:'comment'
+            //     }
+            // ],
+            group:'type'
+         })
+         const arr = result.map(i=>i.toJSON())
 
+         let views = sum(arr,'views');
+         let likes = sum(arr,'likes');
+         let count = sum(arr,'count')
+         return formateReturn({
+            views,
+            likes,
+            count,
+            result:arr
+         })
+    }
 }

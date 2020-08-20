@@ -95,7 +95,7 @@ export default class LList extends Vue {
   transition: $g-transitionTime;
   border-bottom: 1px solid rgba(178,186,194,.15);
   @media (max-width: 1140px) {
-    padding: 5px 10px;
+   padding: 0;
   }
   &:hover {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -107,7 +107,7 @@ export default class LList extends Vue {
     overflow: auto;
     align-items: center;
     @media (max-width: 1140px) {
-      flex: 0 0 150px !important;
+      flex: 0 0 50px !important;
       margin-left: 15px;
     }
     .index {
@@ -119,9 +119,6 @@ export default class LList extends Vue {
     .hot {
       font-weight: 600;
       color: #ff9607;
-    }
-    @media (max-width: 1140px) {
-      flex: 1;
     }
     .pic {
       border-radius: $g-radius;

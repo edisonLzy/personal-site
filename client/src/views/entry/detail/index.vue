@@ -17,9 +17,22 @@
         <div class="header" id="write" v-html="info.article_html"></div>
         <div class="content"></div>
       </section>
-      <section class="content-right">
-        <l-block title="相关文章">1</l-block>
-        <l-block title="浏览统计">1</l-block>
+      <section class="content-right" v-autoSticky="70">
+        <l-block title="相关文章">
+          <DetailAbout :type="info.article_type"></DetailAbout>
+        </l-block>
+        <l-block title="浏览统计">
+          <section class="l-flex-h-sb analyze">
+          <HomeAnalyze 
+          v-for="i in staticList"
+          :key="i.id"
+          v-bind="i"
+          :style="{
+            'border-right':i.id===1?'1px solid #ebebeb':''
+          }"
+          ></HomeAnalyze>
+          </section>
+        </l-block>
         <l-block title="目录">1</l-block>
       </section>
     </main>
@@ -41,9 +54,14 @@
 <script lang="ts">
 import { Vue, Component, Watch } from "vue-property-decorator";
 import { getDetail,getComment,setComment,setLike,ArticleDetail,ArticleComment,ArticleCommentVal } from "@/api";
-import { Route } from "vue-router";
+import HomeAnalyze from "@/common/components/home/analyze.vue";
+import DetailAbout from "@/common/components/detail/about.vue";
 @Component({
     name: "detail",
+    components:{
+        HomeAnalyze,
+        DetailAbout
+    }
 })
 export default class Detail extends Vue {
 @Watch("$route")
@@ -54,7 +72,7 @@ export default class Detail extends Vue {
       article_title: "当 Vue3 遇上 TypeScript 和 TSX",
       name: "LEEZHIYU",
       time: "2020-07-18",
-      article_type: "编程技术",
+      article_type: "",
       article_views: "",
       article_html:"",
       article_likes:""
@@ -64,6 +82,22 @@ export default class Detail extends Vue {
       const data = await setLike(this.article_id);
       this.info.article_likes = data;
   }
+  get staticList (){
+      return   [
+          {
+              id:1,
+              title:"阅读数",
+              count:this.info.article_views,
+              lastDay:"+10"
+          },
+          {
+              id:2,
+              title:"获赞数",
+              count:this.info.article_likes,
+              lastDay:"+10"
+          },
+      ];
+  } 
   // 评论
   comment = "";
   commentList:ArticleComment[] = [];
@@ -129,6 +163,9 @@ export default class Detail extends Vue {
       height: 1000px;
       @media (max-width: 1140px) {
         display: none;
+      }
+     .analyze{
+        padding: 10px 30px;
       }
     }
   }

@@ -1,6 +1,12 @@
 @import './var.scss';
 
 /* common */
+.l-hover{
+    transition: $g-transitionTime;
+    &:hover {
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    }
+}
 .l-textColor-theme{
     color: $g-themeColor;
 }

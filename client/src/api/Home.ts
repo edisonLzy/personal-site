@@ -11,6 +11,10 @@ export interface ArticleListItem{
     user_name:string
     id:number
 }
+export interface TagItem{
+        label:string
+        value:string
+}
 // 获取最新评论
 export async function getLastestComment(){
     const {data,code,msg} = await request.get("v1/api/comment",{
@@ -33,7 +37,6 @@ export async function getRecommand() {
         item.user_author = item.user.user_name;
         return item;
     });
-    
     return returnData({code,msg,data:<ArticleListItem[]>res});
 }
 // 最新发布
@@ -52,6 +55,7 @@ export async function getPublish() {
 }
 // 获取标签 
 export async function getTag() {
+
     return [
         {
             label: "Javascript",
@@ -83,5 +87,4 @@ export async function getTag() {
         }
     ];
 }
-
 

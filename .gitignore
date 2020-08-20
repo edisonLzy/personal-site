@@ -8,5 +8,6 @@ node_modules
 /admin/dist
 /server/node_modules
 /server/dist
-/server/src/logs
+/server/src/logs/api
+/server/src/logs/sql
 /server/public

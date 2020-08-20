@@ -7,7 +7,9 @@
     <main class="main">
       <!-- 内容展示区域 -->
     <transition name="slide" mode="out-in">
-        <router-view ></router-view>
+      <keep-alive :include="['essay']">
+              <router-view ></router-view>
+      </keep-alive>
     </transition>
 
      <!-- footer -->

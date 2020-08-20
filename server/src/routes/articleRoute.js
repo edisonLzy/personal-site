@@ -7,6 +7,11 @@ route.get('/', async (req, res) => {
  const r = await articleService.list(req.query);
  res.send(r)
 })
+// 获取统计信息
+route.get('/analyze',async (req, res) => {
+   const r = await articleService.analyze();
+   res.send(r)
+  })
 // 点赞
 route.put('/like',async (req,res)=>{
    const r = await articleService.likes(req.body);
@@ -32,4 +37,5 @@ route.delete('/:id',async (req,res)=>{
    const r = await articleService.delete(req.params)
    res.send(r)
 })
+
 module.exports  = route;

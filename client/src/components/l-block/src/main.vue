@@ -1,6 +1,11 @@
 <template>
-  <div class="l-block">
-    <section class="l-block-title l-border-bottom">
+  <div class="l-block" v-on="$listeners">
+    <section class="l-block-title l-border-bottom l-flex">
+      <l-icon 
+      v-if="!!icon"
+      :iconClass="icon"
+      style="padding-right:.5em"
+      ></l-icon>
       <h2>{{title}}</h2>
     </section>
     <section class="l-block-content">
@@ -21,6 +26,10 @@ export default class LBlock extends Vue {
       default: "title"
   })
   title!: string;
+  @Prop({
+      type:String
+  })
+  icon!:string;
 }
 </script>
 <style lang="scss" scoped>

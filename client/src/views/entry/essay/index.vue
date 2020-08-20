@@ -7,7 +7,29 @@
 
     <section class="essay-content l-flex-h-sb">
       <div class="essay-content-classify">
-        <l-block :title="article_title">
+        <l-block :title="article_title" icon="article">
+        <template v-for="(it,index) in article_list">
+          <l-list 
+           :key="it.id" 
+           :index="++index"
+           v-bind="it"
+           @click="toDetail(it)">
+           </l-list>
+          </template>
+        </l-block>
+
+     <l-block :title="article_title">
+        <template v-for="(it,index) in article_list">
+          <l-list 
+           :key="it.id" 
+           :index="++index"
+           v-bind="it"
+           @click="toDetail(it)">
+           </l-list>
+          </template>
+        </l-block>
+
+    <l-block :title="article_title">
         <template v-for="(it,index) in article_list">
           <l-list 
            :key="it.id" 
@@ -18,15 +40,12 @@
           </template>
         </l-block>
       </div>
-      <aside class="essay-content-nav">
-        <l-block title="标签">
+
+      
+      <aside class="essay-content-nav"  v-autoSticky="70">
+        <l-block title="标签" icon="tag">
           <ul class="content-nav">
-            <l-tag
-              v-for="item in tagList"
-              :key="item.label"
-              :tag="item.label"
-              @click="filterList(item)"
-            ></l-tag>
+            <l-tags :list="tagList" @select="onTagsSelect"></l-tags>
           </ul>
         </l-block>
       </aside>
@@ -64,6 +83,16 @@ export default class Essay extends Mixins(ReachBottom) {
               id:it.id + ""
           }
       });
+  }
+  onTagsSelect(v:string[]){
+      let _v = v+"";
+      if(v.length === 0 ){
+          this.article_title = "所有文章";
+      }else{
+          this.article_title = _v;
+      }
+      this.article_list  = [];
+      this.getList(_v);
   }
   // 获取文章列表 
   async getList(type:string = ""){

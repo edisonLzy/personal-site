@@ -60,7 +60,7 @@ export default class Home extends Vue {
        });
    }
    toUI() {
-
+  
    }
 }
 </script>

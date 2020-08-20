@@ -46,7 +46,29 @@ exports.formateReturn = v => {
         code: 0
     }
 }
+/**
+ * 小写
+ * @param {*} v 
+ */
 exports.toLowerCase = v=>{
     if(!v && typeof v !== 'string')return '';
     return v.toLocaleLowerCase()
+}
+/**
+ * 对数组中的某个字段求和
+ * @param {*} arr 
+ * @param {*} v 
+ */
+exports.sum = (arr,v)=>{
+ if(!Array.isArray(arr))return;
+ return arr.reduce((acc,i)=>{
+     return (+acc) + +(i[v]);
+ },0)
+}
+/**
+ * 字符串转数组
+ */
+exports.strToArr = (str,sep=',')=>{
+    if(!str&&str.indexOf(sep) !==-1&&str.length === 0)return [];
+    return str.split(sep)
 }
