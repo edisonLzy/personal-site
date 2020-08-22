@@ -4,7 +4,7 @@ interface Analyze {
   views:number
   likes:number
   count:number
-  list:{
+  records:{
       type:string
       views:number
       likes:number

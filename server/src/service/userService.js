@@ -96,7 +96,7 @@ module.exports = {
     async login(info) {
         // 数据校验 前端传递过来的loginId是经过 md5加密的
         const isValid = await asyncValidate(info, Rules.login);
-        if (isValid !== true) return isValid;
+        if (isValid !== true) return false;
         const {password} = info;
         const target = mapping(info,'user');
         const result = await User.findOne({

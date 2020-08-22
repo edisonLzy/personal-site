@@ -12,27 +12,29 @@ export default {
  */
 function autoSticky(Vue:any){
     const offset = 10;
-    const handler = throttle(function(value:number,el:HTMLElement){
-        const toTop = elToTop(el);
+    let status = "pending";
+    let dom:any = null;//缓存dom
+    const handler = throttle(function(value:number){
+        if(status === "success")return;
+        const toTop = elToTop(dom);
         const target  = offset+value;
-        // const hasSet = !!getAttribute(el,"style");
         if(toTop <= target){
-            // if(hasSet){
-            //     setStyle(el,{});
-            // }else{
-            setStyle(el,{
+            setStyle(dom,{
                 position:"sticky",
                 top:`${target}px`
             });
-            // }
+            status = "success";
         }
     },300);
     Vue.directive("autoSticky",{
-        bind:function(el:HTMLElement,binding:any,vnode:any){
+        bind:function(el:HTMLElement,binding:any){
             const {value} = binding;
-            addHandler(window,"scroll",handler.bind(null,value,el));
+            dom = el;
+            addHandler(window,"scroll",handler.bind(null,value));
         },
-        unbind:function(el:HTMLElement,binding:any,vnode:any){
+        unbind:function(){
+            status = "pending";
+            dom = null;
             removeHandler(window,"scroll",handler);
         }
     });

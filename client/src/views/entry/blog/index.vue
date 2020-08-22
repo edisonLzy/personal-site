@@ -31,7 +31,7 @@
         </l-block>
       </div>
 
-      <aside class="blog-content-nav" v-autoSticky="70">
+      <aside class="blog-content-nav" data-src="nav" v-autoSticky="70">
         <l-block title="Creator" icon="write">
           <section class="l-flex-h-sb analyze">
           <HomeAnalyze 

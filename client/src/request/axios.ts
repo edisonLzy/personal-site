@@ -1,14 +1,17 @@
 import axios, { AxiosRequestConfig } from "axios";
 import Storage from "@/utils/localStorage";
-const baseConfig = {
-    withCredentials: true,
+const isDev = process.env.NODE_ENV ==="development" ;
+const baseConfig:AxiosRequestConfig = {
     timeout: 50000,// 请求超时时间
     // transformResponse: [function (data) {
     //     // 对 data 进行任意转换处理
     //     return JSON.parse(data);
     // }]
 };
-
+if(!isDev){
+    baseConfig.baseURL ="http://localhost:3000";
+}
+// if(process.env.NODE_ENV){}
 // 缓存一些基本的配置
 function RequestFactory(base: AxiosRequestConfig) {
     return (options: AxiosRequestConfig = {}) => {

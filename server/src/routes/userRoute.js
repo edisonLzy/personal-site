@@ -6,6 +6,7 @@ const route = Router()
 // 登陆
 route.post('/login', async (req, res) => {
   const r = await userService.login(req.body);
+  console.log(r)
   if (!!r) {
     let value = r.id;
     //登录成功

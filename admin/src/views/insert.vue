@@ -12,9 +12,9 @@
         <el-form-item prop="title">
           <el-input v-model="form.title" clearable placeholder="title:please enter your title"></el-input>
         </el-form-item>
-          <el-form-item prop="desc">
-       <el-input type="textarea" v-model="form.desc" placeholder="desc:please enter your desc"></el-input>
-       </el-form-item>
+        <el-form-item prop="desc">
+          <el-input type="textarea" v-model="form.desc" placeholder="desc:please enter your desc"></el-input>
+        </el-form-item>
       </el-form>
     </section>
     <section class="md">
@@ -22,6 +22,7 @@
         @imgAdd="imgAdd"
         @imgDel="imgDel"
         placeholder="drop you fingure"
+        navigation
         v-model="form.md"
         ref="md"
         @change="change"
@@ -37,9 +38,11 @@
 </template>
 
 <script>
+const h1 = /<(h[1-6])>([\S\s]*?)<\/(h[1-6])>/g;
 // 导入组件 及 组件样式
 import { getWhoami, addArticle } from "@/api";
 import { mavonEditor } from "mavon-editor";
+import $ from "jquery"
 import "mavon-editor/dist/css/index.css";
 export default {
   name: "insert",
@@ -54,7 +57,8 @@ export default {
         type: "",
         md: "",
         html: "",
-        desc:""
+        desc: "",
+        navigation: "",
       },
       types: [
         "typescript",
@@ -81,7 +85,7 @@ export default {
             trigger: "blur",
           },
         ],
-         desc: [
+        desc: [
           {
             required: true,
             message: "please enter your desc",
@@ -99,8 +103,11 @@ export default {
   methods: {
     change(md, html) {
       this.form.html = html;
+      this.form.md = md;
     },
     async comfirm() {
+            // 获取目录
+      this.getNav()
       await this.$refs["form"].validate();
       // 校验md是否为空
       if (!this.hasMd) {
@@ -110,7 +117,6 @@ export default {
         });
         return;
       }
-
       const data = await addArticle(this.form);
     },
     back() {
@@ -120,6 +126,22 @@ export default {
     },
     imgAdd(filename, file) {},
     imgDel(filename) {},
+    getNav(html) {
+      const nav = $(".v-note-navigation-content")
+     const data = nav.find("h1,h2,h3,h4");
+     let result = [];
+     data.each((i,e)=>{
+       const level = e.tagName.split('H')[1];
+       const title = e.innerText
+       const id = $(e).find("a").attr("id");
+       result.push({
+         level,
+         title,
+         id
+       })
+     })
+    this.form.navigation = JSON.stringify(result)
+    },
   },
   async mounted() {
     let data = await getWhoami();
@@ -136,7 +158,7 @@ export default {
 .title {
   margin-right: 20px;
 }
-.md{
+.md {
   max-height: 600px;
   overflow: auto;
 }

@@ -7,8 +7,8 @@
     <main class="main">
       <!-- 内容展示区域 -->
     <transition name="slide" mode="out-in">
-      <keep-alive :include="['essay']">
-              <router-view ></router-view>
+      <keep-alive :include="state.cache">
+              <router-view></router-view>
       </keep-alive>
     </transition>
 
@@ -34,6 +34,7 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import {ArticleListItem} from "@/api/Home";
+import {state} from "./store";
 @Component({
     name: "entry"
 })
@@ -75,6 +76,9 @@ export default class Entry extends Vue {
               id:it.id + ""
           }
       });
+  }
+  get state(){
+      return state;
   }
 }
 </script>

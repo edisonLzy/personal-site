@@ -81,9 +81,6 @@ export default class LList extends Vue {
           view: this.article_views,
       };
   }
-  mounted() {
-      console.log(this.info); 
-  }
 }
 </script>
 <style lang="scss" scoped>
@@ -109,6 +106,7 @@ export default class LList extends Vue {
     @media (max-width: 1140px) {
       flex: 0 0 50px !important;
       margin-left: 15px;
+      padding-right: 1em;
     }
     .index {
       padding-right: 10px;
@@ -133,6 +131,7 @@ export default class LList extends Vue {
     @media (max-width: 1140px) {
       margin-left: 0;
       font-size: 10px;
+      padding: 1em;
     }
     &__info {
       padding-top: 0.5em;

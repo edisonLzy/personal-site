@@ -41,6 +41,10 @@ module.exports = sequelize.define('Article', {
         allowNull: false,
         defaultValue:'0'
     },
+    'article_navigation': {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
     'article_desc':{
         type: DataTypes.TEXT,
         allowNull: false

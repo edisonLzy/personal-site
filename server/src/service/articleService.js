@@ -137,7 +137,7 @@ module.exports = {
         if (!!isValidate) return isValidate;
         const { id } = info;
         const result = await Article.findOne({
-            attributes: ["id", "article_title", "article_type", "article_html", "article_likes", "article_views","time"],
+            attributes: ["id", "article_title", "article_type", "article_html", "article_likes", "article_views","time","article_navigation"],
             where: {
                 id
             },
@@ -162,7 +162,13 @@ module.exports = {
             }
         }
         )
-        return formateReturn(result)
+        if(data.article_navigation){
+            data.article_navigation = JSON.parse(data.article_navigation)
+        }else{
+            data.article_navigation =[];
+        }
+
+        return formateReturn(data)
     },
     async likes(info) {
         const isValidate = validate(info, Rules.detail);
@@ -239,7 +245,7 @@ module.exports = {
             views,
             likes,
             count,
-            result:arr
+            records:arr
          })
     }
 }
