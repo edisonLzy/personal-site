@@ -123,3 +123,5 @@ ALTER TABLE blog.article MODIFY article_title VARCHAR(10) CHARACTER SET "utf8";
 
 - [x] Incorrect datetime value: '0000-00-00 00:00:00' for column 'createdAt' at row 1
 > 重新同步了 数据库
+
+## did
