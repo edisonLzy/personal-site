@@ -102,6 +102,9 @@ export default class About extends Vue {
 
 <style lang="scss" scoped>
 .about {
+        @media (max-width: 1140px) {
+       padding: 0px 5px;
+      }
   .blue {
     color: #29b6f6;
   }
@@ -132,6 +135,10 @@ export default class About extends Vue {
     &-item {
       font-size: 20px;
       margin: 2em 0 ;
+      @media (max-width: 1140px) {
+        font-size: 15px;
+        margin: 1em 0 ;
+      }
       padding: 1em;
       background: #fff;
       border-radius: $g-radius;

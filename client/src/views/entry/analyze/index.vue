@@ -43,7 +43,8 @@ export default class Analyze extends Vue {
               data:typeData
           },
           title:{
-              text:"文章关键指标统计"
+              text:"文章关键指标统计",
+              bottom:"0"
           },
           series:normalSeries(legendData,records)
       });

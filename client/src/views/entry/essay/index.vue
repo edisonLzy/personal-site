@@ -95,7 +95,7 @@ export default class Essay extends Mixins(ReachBottom) {
 .essay {
   &-banner {
     position: relative;
-    height: 400px;
+    max-height: 400px;
     border-radius: $g-radius;
     overflow: hidden;
   }

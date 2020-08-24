@@ -7,7 +7,7 @@
       </section>
       <section class="logo" @click="toHome">
         <slot name="logo">
-          <h1>LOGO</h1>
+          <h1>EVAN LEE</h1>
         </slot>
       </section>
       <section class="link">

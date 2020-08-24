@@ -154,11 +154,16 @@ export default class Detail extends Vue {
 @import "../../../assets/markdownTheme/orangeheart.css";
 .detail {
   &-header {
-    height: 300px;
+    max-height: 300px;
     position: relative;
+    overflow: hidden;
+    border-radius:$g-radius;
     .header-dec {
       color: #fff;
       text-align: center;
+      @media (max-width: 1140px) {
+       font-size: 12px;
+      }
     }
   }
   &-content {
@@ -169,6 +174,9 @@ export default class Detail extends Vue {
       flex: 1;
       border-radius: $g-radius;
       background: rgb(252, 252, 252);
+      @media (max-width: 1140px) {
+       padding: 0;
+      }
     }
     .content-right {
       flex: 0 0 400px;
@@ -183,7 +191,7 @@ export default class Detail extends Vue {
     }
   }
   &-comment {
-    margin-top: $g-gap * 2;
+    margin: $g-gap * 2 0;
     border-radius: $g-radius;
     // height: 200px;
     background: rgb(255, 255, 255);

@@ -39,7 +39,16 @@ export default class LVideo extends Vue {
   &-bg {
     width: 100%;
     height: 100%;
+    @media (max-width: 1140px) {
+      background: url("/image/post.jpg") #000 center;
+      background-repeat: no-repeat;
+     background-size:cover;
+     background-position:80%;
+    }
     .video {
+      @media (max-width: 1140px) {
+        display: none;
+      }
       min-width: 100%;
       min-height: 100%;
       height: auto;

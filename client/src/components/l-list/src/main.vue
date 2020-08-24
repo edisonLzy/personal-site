@@ -92,7 +92,8 @@ export default class LList extends Vue {
   transition: $g-transitionTime;
   border-bottom: 1px solid rgba(178,186,194,.15);
   @media (max-width: 1140px) {
-   padding: 0;
+   padding: 10px;
+   box-shadow: 0 2px 12px 0 rgba(0,0,0,.08);
   }
   &:hover {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -131,13 +132,16 @@ export default class LList extends Vue {
     @media (max-width: 1140px) {
       margin-left: 0;
       font-size: 10px;
-      padding: 1em;
+      padding: .5em;
     }
     &__info {
       padding-top: 0.5em;
       @media (max-width: 1140px) {
         justify-content: space-between;
       }
+    }
+    &__title{
+      padding-bottom: .5em;
     }
     &__desc {
       height: 84px;
@@ -149,8 +153,8 @@ export default class LList extends Vue {
       -webkit-box-orient: vertical;
       @media (max-width: 1140px) {
         -webkit-line-clamp: 2;
-        height: 50px;
-        line-height: 25px;
+        height: 30px;
+        line-height: 15px;
       }
     }
   }

@@ -17,7 +17,6 @@ function createPieChart(options:OP){
             value:options.data[item]
         };
     });
-    console.log(seriesData);
     return{
         title: options.title,
         tooltip: {
@@ -59,14 +58,14 @@ function createBarChart(options:OP){
                 }
             }
         },
-        toolbox: {
-            feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ["line", "bar"]},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
+        // toolbox: {
+        //     feature: {
+        //         dataView: {show: true, readOnly: false},
+        //         magicType: {show: true, type: ["line", "bar"]},
+        //         restore: {show: true},
+        //         saveAsImage: {show: true}
+        //     }
+        // },
         title: options.title,
         legend: options.legend,
         xAxis: options.xAxis,

@@ -38,9 +38,12 @@ export default class LBlock extends Vue {
   padding: 15px 20px;
   background-color: #fff;
   border-radius: $g-radius;
+  @media (max-width:1140px) {
+     padding: 5px;
+  }
   &-title {
     line-height: 20px;
-    padding-bottom: .5em;
+    padding: .5em;
     h2 {
       font-weight: 400;
       font-size: 15px;

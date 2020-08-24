@@ -166,7 +166,7 @@ export default class Blog extends Vue {
 .blog {
   &-banner {
     position: relative;
-    height: 400px;
+    max-height: 400px;
     border-radius: $g-radius;
     overflow: hidden;
   }

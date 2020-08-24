@@ -4,7 +4,7 @@
     v-on="$listeners">
        <p>{{$attrs.title}}</p>
        <h2>{{$attrs.count}}</h2>
-       <p>较前日{{$attrs.lastDay}}</p>
+       <p>较前日 ++</p>
     </section>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container l-flex-v-sb">
     <header class="header l-fixed-top">
       <l-navigator :navList="navList" @search="search" @login="login"></l-navigator>
     </header>
@@ -7,17 +7,19 @@
     <main class="main">
       <!-- 内容展示区域 -->
     <transition name="slide" mode="out-in">
-      <keep-alive :include="state.cache">
+      <!-- <keep-alive :include="state.cache"> -->
               <router-view></router-view>
-      </keep-alive>
+      <!-- </keep-alive> -->
     </transition>
+
+        
+    </main>
 
      <!-- footer -->
      <l-forward title="Fear no one">
        <!-- <span>Only stronger survice</span> -->
      </l-forward>
-    </main>
-     
+
       <!-- 回到顶部 -->
       <l-toTop></l-toTop>
       <!-- 搜索组件 -->
@@ -85,6 +87,7 @@ export default class Entry extends Vue {
 
 <style lang="scss" scoped>
 .container {
+  height:100%;
   .header {
     height: 70px;
     background: #fff;
@@ -92,7 +95,7 @@ export default class Entry extends Vue {
   }
   .main {
     padding-top: 80px;
-    padding-bottom: 20px;
+    // padding-bottom: 20px;
     width: 90%;
     margin:0 auto;
   
