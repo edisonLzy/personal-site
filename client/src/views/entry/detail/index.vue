@@ -14,7 +14,7 @@
     </header>
     <main class="detail-content l-flex-h-sb">
       <section class="content-left">
-        <div class="header" id="write" v-html="info.article_html"></div>
+        <div class="header markdown-body" id="write" v-html="info.article_html"></div>
         <div class="content"></div>
       </section>
       <section class="content-right" v-autoSticky="70">
@@ -55,6 +55,7 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from "vue-property-decorator";
+import "github-markdown-css";
 import {
     getDetail,
     getComment,

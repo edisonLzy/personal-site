@@ -6,13 +6,17 @@ const route = Router()
 // 登陆
 route.post('/login', async (req, res) => {
   const r = await userService.login(req.body);
-  console.log(r)
   if (!!r) {
     let value = r.id;
     //登录成功
      publish(res, undefined, { id: value });
   }
-  res.send(r)
+  const resp = {
+    code:r === null?0:1,
+    data:r,
+    msg:r === null?'error':'success',
+  }
+  res.send(resp)
 })
 // 注册
 route.post('/sign', async (req, res) => {

@@ -4,8 +4,8 @@ import Api from './axios';
 interface Config extends AxiosRequestConfig{
     loading?:boolean;
 }
-type noData = (url: string,data?:any,config?: Config) => ReturnType<typeof Api.get>;
-type withData =  (url: string,data?:any,config?: Config) => ReturnType<typeof Api.post>;
+type noData = (url: string,data?:any,config?: Config) => Promise<any>;
+type withData =  (url: string,data?:any,config?: Config) => Promise<any>;
 
 interface Request {
     get:noData,

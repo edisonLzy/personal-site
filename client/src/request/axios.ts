@@ -9,7 +9,7 @@ const baseConfig:AxiosRequestConfig = {
     // }]
 };
 if(!isDev){
-    baseConfig.baseURL ="http://localhost:3000";
+    baseConfig.baseURL ="http://www.leezhiyu.cn";
 }
 // if(process.env.NODE_ENV){}
 // 缓存一些基本的配置

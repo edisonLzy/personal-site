@@ -1,12 +1,17 @@
 <template>
   <div class="l-login">
     <h2 class="l-login-title">LOGIN</h2>
-    <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item label="Account">
-        <el-input v-model="form.account" clearable placeholder="please enter your accoun"></el-input>
+    <el-form :rules="rules" ref="form" :model="form" label-width="80px">
+      <el-form-item label="Account" prop="account">
+        <el-input v-model="form.account" clearable placeholder="please enter your account"></el-input>
       </el-form-item>
-      <el-form-item label="Password">
-        <el-input v-model="form.password" clearable placeholder="please enter your accoun"></el-input>
+      <el-form-item label="Password" prop="password">
+        <el-input
+          type="password"
+          v-model="form.password"
+          clearable
+          placeholder="please enter your password"
+        ></el-input>
       </el-form-item>
       <el-form-item>
         if your don't have account,you can
@@ -20,7 +25,7 @@
   </div>
 </template>
 <script lang='ts'>
-import md5 from 'md5';
+import md5 from "md5";
 import { Component, Vue, Prop, Model, Emit } from "vue-property-decorator";
 @Component({
   name: "l-login",
@@ -28,19 +33,31 @@ import { Component, Vue, Prop, Model, Emit } from "vue-property-decorator";
 })
 export default class LLogin extends Vue {
   static componentname = "l-login";
+
+  rules = {
+    account: [
+      { required: true, message: "please enter your account", trigger: "blur" },
+    ],
+    password: [
+      { required: true, message: "please enter your passowrd", trigger: "blur" },
+    ],
+  };
   @Emit("login")
-  toLogin() {
+  async toLogin() {
+    // 校验 
+    await (this.$refs["form"] as any).validate()
+
     // 使用md5 进行加密
-    const {account,password:_p} = this.form;
-    let password = md5(_p);
+    const { account, password: Password } = this.form;
+    const password = md5(Password);
     return {
-    account,
-    password
+      account,
+      password,
     };
   }
-  @Emit('toggle')
-  toggle(){}
-  
+  @Emit("toggle")
+  toggle() {}
+
   form = {
     account: "",
     password: "",

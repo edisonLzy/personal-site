@@ -1,19 +1,22 @@
-import { Loading } from 'element-ui';
-// import { ElLoadingComponent } from 'element-ui/types/loading';
+// import Loading from "@/components/l-loading/src/main.vue";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+
 export const Spin: {
     option: any,
     i:{close:()=>void},
     start: () => void,
     close: () => void
 } = {
-    option: { text: 'loading' },
+    option: { text: "loading" },
     i:{close:()=>{}},
     start() {
-        this.i = (Loading.service(this.option) as any);
+        NProgress.start();
     },
     close() {
+        NProgress.done();
         // if (this.i instanceof ElLoadingComponent) {
-            this.i.close()
+        // this.i.close();
         // }
     }
-}
+};

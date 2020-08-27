@@ -16,4 +16,12 @@ router.beforeEach((to, from, next)=>{
 
 ```
 
-## did
+## elementUI 的form表单验证 
+
+> 表单项绑定的属性值 必须和 el-form-item的prop属性 以及 el-form中校验规则一致
+```html
+      <el-form-item label="Account" prop="account">
+        <el-input v-model="form.account" clearable placeholder="please enter your account"></el-input>
+      </el-form-item>
+
+```

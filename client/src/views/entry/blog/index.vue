@@ -144,6 +144,7 @@ export default class Blog extends Vue {
    async init() {
        this.tagList = await getTag();
        const list = await getRecommand();
+       
        this.recommand.push(...list);
        const _data = await getPublish();
        this.lastest.push(..._data);

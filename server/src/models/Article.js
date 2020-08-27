@@ -5,7 +5,7 @@ module.exports = sequelize.define('Article', {
     'article_cover':{
         type:DataTypes.VIRTUAL,
         get(){
-            return `http://localhost:3000/files/icon/${this.article_type}.jpg`
+            return `http://www.leezhiyu.cn/files/icon/${this.article_type}.jpg`
         }
     },
     'time':{

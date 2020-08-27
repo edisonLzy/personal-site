@@ -19,7 +19,7 @@
 
 <script>
 import {getSign,getLogin} from '@/api'
-import { Message } from 'element-ui';
+import { Message,Notification}from 'element-ui';
 export default {
   name: "login",
   data() {
@@ -30,6 +30,10 @@ export default {
     async toLogin(form) {
       const r = await getLogin(form);
       if(!!r){
+        Notification.success({
+          title:"success",
+          text:"login success"
+        })
         this.$router.push({
         name:'insert'
       })

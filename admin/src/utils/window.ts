@@ -25,7 +25,7 @@ export function ReachBottom(dis = 10) {
     return sT + sH >= cH;
 }
 // 获取滚动条的高度
-export function getScrollTop() {
+export function getScrollTop():number {
     if (document.documentElement.scrollTop) {
         getScrollTop = () => document.documentElement.scrollTop;
     } else if (document.body.scrollTop) {
@@ -43,6 +43,23 @@ export function scrollToTop() {
         window.requestAnimationFrame(scrollToTop);
         window.scrollTo(0, c - c / 8);
     }
+}
+// 平滑到指定滚动位置
+export function scrollToTarget(target:number){
+
+    window.scrollTo({ 
+        top: target, 
+        behavior: "smooth" 
+    });
+
+    // const c = getScrollTop();
+    // console.log(c);
+    // if (c > target) {
+    // //html5 提供一个专门用于请求动画的API，那就是 requestAnimationFrame，顾名思义就是请求动画帧。
+    //     window.requestAnimationFrame(scrollToTarget.bind(null,target));
+    //     window.scrollTo(0, target - 8);
+    // }
+
 }
 // 添加事件监听
 export function addHandler(target: any, eventType: string, handler: any) {
