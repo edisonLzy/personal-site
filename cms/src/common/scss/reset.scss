@@ -1,0 +1,10 @@
+@mixin reset-margin-padding{
+    margin: 0;
+    padding: 0;
+}
+/* 重置 样式*/
+@for $i from 1 through 5 {
+    h#{$i}{
+       @include reset-margin-padding;
+    }
+}
