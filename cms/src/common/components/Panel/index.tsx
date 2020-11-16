@@ -4,10 +4,10 @@ const Panel:FC = (props)=> {
 	return (
 		<div className="panel">
 			<section className="panel-left">
-				{props.children}
+				
 			</section>
 			<section className="panel-right">
-                
+			{props.children}
 			</section>
 		</div>
 	);

@@ -20,13 +20,13 @@ export default class CanvasBg extends Component<Props,State> {
 	componentDidMount() {
 		const canvas = this.dom.current;
 		if (canvas) {
-			loadBg(canvas as HTMLCanvasElement);
+			// loadBg(canvas as HTMLCanvasElement);
 		}
 	}
 	render() {
 		return (
 			<div className="canvas-bg">
-				<canvas id="canvas" className="canvas" ref={this.dom}></canvas>
+				{/* <canvas id="canvas" className="canvas" ref={this.dom}></canvas> */}
 				<section className="slot">
 					{this.props.children}
 				</section>
