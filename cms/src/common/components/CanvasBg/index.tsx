@@ -1,10 +1,24 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import './index.scss';
-export default class CanvasBg extends Component {
+
+interface State {
+	dom:HTMLCanvasElement
+}
+interface Props {
+	children?:any
+}
+export default class CanvasBg extends Component<Props,State> {
+	
+	dom = React.createRef() as any;
+
+	constructor(props: Props | Readonly<Props>){
+		super(props);
+	}
+
+	
 	componentDidMount() {
-		const canvas = document.querySelector('#canvas');
-		console.log(canvas);
+		const canvas = this.dom.current;
 		if (canvas) {
 			loadBg(canvas as HTMLCanvasElement);
 		}
@@ -12,7 +26,7 @@ export default class CanvasBg extends Component {
 	render() {
 		return (
 			<div className="canvas-bg">
-				<canvas id="canvas" className="canvas"></canvas>
+				<canvas id="canvas" className="canvas" ref={this.dom}></canvas>
 				<section className="slot">
 					{this.props.children}
 				</section>
@@ -23,8 +37,6 @@ export default class CanvasBg extends Component {
 
 function loadBg(canvas: HTMLCanvasElement) {
 	const ctx = canvas.getContext('2d');
-	console.log(ctx);
-
 	if (ctx) {
 		const RESOLUTION = 1;
 

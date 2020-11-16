@@ -33,9 +33,16 @@ import {Button} from 'antd';
 
 > cnpm i react-router-dom
 
+## 过渡动画 
+
+
 # 问题记录
 
 1.引入 antd 严格模式下报错 
 > findDOMNode is deprecated in StrictMode. findDOMNode was passed an instance of Wave which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here。 
 
 `暂时删除 严格模式解决`
+
+
+# get 
+1. react-redux 链接 react 和 redux

@@ -1,0 +1,27 @@
+.panel{
+    display: flex;
+    width:800px;
+    height: 500px; 
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    &-left{
+        flex: 1;
+        height: 100%;
+        background: {
+            color: lightblue;
+            image:url('../../../assets/imgs/login1.jpg');
+            size:cover
+        };
+    
+    }
+
+    &-right{
+        flex: 1;
+        height: 100%;
+        background: {
+            color: rgb(177, 211, 100);
+        };
+    }
+    
+}
