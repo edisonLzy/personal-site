@@ -7,7 +7,7 @@ const Panel:FC = (props)=> {
 				
 			</section>
 			<section className="panel-right">
-			{props.children}
+				{props.children}
 			</section>
 		</div>
 	);

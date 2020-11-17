@@ -1,13 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {updateLogin} from '../../store/model/login';
 import CanvasBg from '../../common/components/CanvasBg';
 import Panel from '../../common/components/Panel';
-import LoginComp,{Form} from '../../components/Login';
+import Entry,{Form} from '../../components/Login';
 import './index.scss';
 import { Action } from 'redux-actions';
 import {setLoginApi} from '../../api/user';
+import { log } from 'console';
 
 function mapState(state:any){
 	return {
@@ -35,17 +36,20 @@ interface Props extends T {
 
 const Login: FC<Props> = (props) => {
 	const history = useHistory();
-	async function handleLogin(form:Form){
+	const [isLogin, setIsLogin] = useState(true);
+	async function onConfirm(form:Form){
 		const data = await setLoginApi(form);
-		console.log(data);
 		props.onUpdatelogin(true);
 		history.push('/admin');
+	}
+	function onToggle(isLogin:boolean){
+		setIsLogin(isLogin);
 	}
 	return (
 		<>
 			<CanvasBg>
 				<Panel>
-	               <LoginComp onConfirm={handleLogin}/>
+					<Entry onConfirm={onConfirm} isLogin={isLogin} onToggle={onToggle}/>
 				</Panel>
 			</CanvasBg>
 		</>
