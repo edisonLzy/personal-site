@@ -13,6 +13,7 @@ const App:FC = ()=>{
 			<RouterGuide onChange={(pre,location,action) =>{
 				console.log(pre,location,action);
 			}} >
+				
 				<Switch>
 					<Route path="/" component={Login} exact></Route> 
 					<ProtectedRoute path="/admin" component={Admin} exact></ProtectedRoute>

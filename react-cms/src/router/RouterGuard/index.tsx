@@ -3,12 +3,16 @@
 // 导航守卫
 import { Location } from 'history';
 import React ,{FC, useMemo,useEffect}from 'react';
+
+import {ConnectedRouter} from 'connected-react-router';
+import history from '../../store/history';
+
 import {BrowserRouter as Router,useHistory} from 'react-router-dom';
-let prevLoaction: Location<unknown>, location: Location<unknown>, action:string, unBlock;
+let prevLoaction: Location<any>, location: Location<any>, action:string, unBlock;
 
 
 interface OnChange{
-    (prevLoaction:Location<unknown>, location:Location<unknown>, action:string):void;
+    (prevLoaction:Location<any>, location:Location<any>, action:string):void;
 }
 
 type Props =Partial<{
@@ -20,7 +24,8 @@ function useBlock(){
 	const history = useHistory();
 	useEffect(() => {
 		// 添加 block
-		const unBlock = history.block((newLocation,ac)=>{
+		const unBlock = history.block(block=>{
+			const {location:newLocation,action:ac} = block;
 			prevLoaction = history.location;
 			location = newLocation;
 			action = ac;
@@ -36,7 +41,7 @@ function useListen(onChange?:OnChange){
 	const history = useHistory();
 	useEffect(() => {
 		// 添加 Listen
-		const unListen = history.listen((location,action)=>{
+		const unListen = history.listen(({location,action})=>{
 			if(onChange){
 				const newLocation = history.location;
 				onChange(prevLoaction, newLocation, action);
@@ -67,10 +72,12 @@ const RouterGuide:FC<Props> = (props)=> {
 
 	},[]);
 	return (
-		<Router getUserConfirmation={handler}>
-			<GuideHelper onChange={props.onChange}/>
-			{props.children}
-		</Router>
+		<ConnectedRouter history={history}>
+			<Router getUserConfirmation={handler}>
+				<GuideHelper onChange={props.onChange}/>
+				{props.children}
+			</Router>
+		</ConnectedRouter>
 	);
 };
 export default RouterGuide;

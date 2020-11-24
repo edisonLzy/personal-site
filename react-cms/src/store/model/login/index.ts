@@ -14,11 +14,11 @@ export const {updateLogin} = createActions({
 
 const updateLoginType = updateLogin.toString();
 // 创建 reducers
-const reducers = handleActions({
+const reducers = handleActions<StateType,boolean>({
 	[updateLoginType]:(state,{payload})=>{
 		return {
 			...state,
-			isLogin: (payload as any) as boolean
+			isLogin: payload
 		};
 	}
 },state);
